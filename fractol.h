@@ -1,8 +1,14 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
+
+# define X_MIN -2.0
+# define X_MAX 1.0
+# define Y_MIN -1.5
+# define Y_MAX 1.5
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "fractol.h"
+#include <mlx.h>
 
 typedef struct s_img
 {
