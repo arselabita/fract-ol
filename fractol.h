@@ -33,7 +33,10 @@ typedef struct s_fract
     double x_min;
     double x_max;
     double y_min;
-    double y_max; 
+    double y_max;
+
+    double re;
+    double im;
 
 } t_fract;
 
