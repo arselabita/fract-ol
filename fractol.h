@@ -26,10 +26,6 @@ typedef struct s_data
     t_img img;
 }   t_data;
 
-void    my_pixel_put(t_img img, int x, int y, int color);
-int keyhandler(int key, t_data *data);
 void init_window_and_display();
-
-
 
 #endif

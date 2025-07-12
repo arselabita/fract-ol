@@ -13,6 +13,29 @@ static int ft_exit(t_data *data)
     exit(0);
     return (0);
 }
+// to draw one pixel
+// y * linelen -> move to the correct row
+// x * bpp/8 -> move to the correct column
+// add them together -> pointer to a pixel location
+// cast the memory and write the color
+
+// writing a raw pixel data into the memory -low-level-drawing
+static void    my_pixel_put(t_img img, int x, int y, int color)
+{
+    char* dest;
+
+    dest = img.addr + (y * img.linelen + x * (img.bpp / 8));
+    *(unsigned int*)dest = color;
+}
+// this to handle my keyboard input, so in case ESC is pressed with keycode 6307, 
+// means exit my program
+static int keyhandler(int key, t_data *data)
+{
+    if (key == 65307)
+        ft_exit(data);
+    return (0);
+}
+
 void init_window_and_display()
 {
     t_data data; // declaration of the main data struct
