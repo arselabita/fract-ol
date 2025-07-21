@@ -21,26 +21,7 @@ typedef struct s_data
     t_img img;
 }   t_data;
 
-typedef struct s_fract
-{
-    void *mlx;
-    void *win;
-    t_img img;
-    
-    int width;
-    int height;
-
-    double x_min;
-    double x_max;
-    double y_min;
-    double y_max;
-
-    double re;
-    double im;
-
-} t_fract;
-
 void init_window_and_display();
-void ft_fractal(int ac, char **av);
+void ft_fractal(char *av);
 
 #endif
