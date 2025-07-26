@@ -1,4 +1,16 @@
-#include "fractol.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abita <abita@student.42vienna.com>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/26 20:59:28 by abita             #+#    #+#             */
+/*   Updated: 2025/07/26 21:09:02 by abita            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "fractol.h"	
 
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -13,6 +25,7 @@ int	ft_strcmp(char *s1, char *s2)
 	}
 	return (0);
 }
+
 void input_validity(t_data data, int argc, char **argv)
 {
     int x;
@@ -36,5 +49,6 @@ void input_validity(t_data data, int argc, char **argv)
         ft_julia(x, y);
     }
     else
-        return(1, write(1, "Please input the right fractal type: Mandelbrot or Julia\n", 58));
+        return(1, write(1, "Please input the right fractal type: \
+			   Mandelbrot or Julia\n", 58));
 }

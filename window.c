@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   window.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abita <abita@student.42vienna.com>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/26 20:59:25 by abita             #+#    #+#             */
+/*   Updated: 2025/07/26 21:09:29 by abita            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 static int ft_exit(t_data *data)
@@ -30,7 +42,8 @@ void init_window_and_display(t_data data)
     data.mlx = mlx_init(); 
     data.win = mlx_new_window(data.mlx, 1100, 800, "The Fract-ol"); 
     data.img.img =  mlx_new_image(data.mlx, 1100, 800); 
-    data.img.addr = mlx_get_data_addr(data.img.img, &data.img.bpp, &data.img.linelen, &data.img.endian);
+    data.img.addr = mlx_get_data_addr(data.img.img, &data.img.bpp, \
+									  &data.img.linelen, &data.img.endian);
 
     i = -1;
     while (++i < 1100)
