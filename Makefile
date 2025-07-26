@@ -3,7 +3,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 CFILES = \
-	main.c
+	main.c 
 
 OFILES = $(CFILES:.c=.o)
 

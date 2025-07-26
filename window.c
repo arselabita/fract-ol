@@ -23,9 +23,8 @@ static int keyhandler(int key, t_data *data)
     return (0);
 }
 
-void init_window_and_display()
+void init_window_and_display(t_data data)
 {
-    t_data data;
     int i;
 
     data.mlx = mlx_init(); 
