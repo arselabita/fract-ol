@@ -59,7 +59,7 @@ void input_validity(t_data *data, int argc, char **argv)
 		exit (1);
 	}
     if (ft_strcmp(argv[1], "Mandelbrot") == 0)
-        ft_mandelbrot(&data);
+        ft_mandelbrot(data);
     else if (ft_strcmp(argv[1], "Julia") == 0)
     {
         if (argc < 4)
@@ -67,14 +67,13 @@ void input_validity(t_data *data, int argc, char **argv)
 			write(1, "Julia, needs two parameters, x and y!\n", 39);
 			exit (1);
 		}
-        data.x = ft_atoi(argv[2]);
-        data.y = ft_atoi(argv[3]);
-        ft_julia(&data, x, y);
+        data->x = ft_atoi(argv[2]);
+        data->y = ft_atoi(argv[3]);
+        ft_julia(data, data->x, data->y);
     }
     else
     {
-		write(1, "Please input the right fractal type: \
-			   Mandelbrot or Julia\n", 58);
+		write(1, "Please input the right fractal type: Mandelbrot or Julia\n", 58);
 		exit(1);
 	}
 }

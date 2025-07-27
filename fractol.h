@@ -32,11 +32,11 @@ typedef struct s_data
     void *mlx;
     void *win;
     t_img img;
-	int x = 0;
-	int y = 0;
+	int x;
+	int y;
 }   t_data;
 
-void	init_window_and_display(t_data data, int argc, char **argv);
+void    input_validity(t_data *data, int argc, char **argv);
 void	ft_mandelbrot(t_data *data);
 void	ft_julia(t_data *data, int x, int y);
 
