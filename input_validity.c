@@ -69,7 +69,7 @@ void input_validity(t_data *data, int argc, char **argv)
 		}
         data.x = ft_atoi(argv[2]);
         data.y = ft_atoi(argv[3]);
-        ft_julia(data, x, y);
+        ft_julia(&data, x, y);
     }
     else
     {
