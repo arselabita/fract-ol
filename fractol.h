@@ -33,9 +33,9 @@ typedef struct s_data
     t_img img;
 }   t_data;
 
-void init_window_and_display();
-void ft_fractal(char *av);
-int	ft_strcmp(char *s1, char *s2);
+void	init_window_and_display(t_data data, int argc, char **argv);
+void	ft_fractal(char *av);
+int		ft_strcmp(char *s1, char *s2);
 
 
 #endif
