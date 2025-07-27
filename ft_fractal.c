@@ -13,11 +13,11 @@
 #include "fractol.h"
 #include <stdio.h>
 
-void ft_mandelbrot()
+void ft_mandelbrot(t_data *data)
 {
     printf("mandelbdsdrot");
 }
-void ft_julia(int x, int y)
+void ft_julia(t_data *data, int x, int y)
 {
     printf("juldddia");
 }

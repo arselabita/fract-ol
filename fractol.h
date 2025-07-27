@@ -16,6 +16,7 @@
 #include <mlx.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <limits.h>
 
 typedef struct s_img
 {
@@ -31,11 +32,12 @@ typedef struct s_data
     void *mlx;
     void *win;
     t_img img;
+    int x = 0;
+    int y = 0;
 }   t_data;
 
 void	init_window_and_display(t_data data, int argc, char **argv);
-void	ft_fractal(char *av);
-int		ft_strcmp(char *s1, char *s2);
-
+void ft_mandelbrot(t_data *data);
+void ft_julia(t_data *data, int x, int y);
 
 #endif
