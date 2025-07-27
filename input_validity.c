@@ -63,14 +63,10 @@ void input_validity(t_data *data, int argc, char **argv)
     else if (ft_strcmp(argv[1], "Julia") == 0)
     {
         if (argc < 4)
-<<<<<<< HEAD
-            return (1, write(1, "Julia, needs two parameters, x and y!\n", 39));
-=======
-        {
+		{
 			write(1, "Julia, needs two parameters, x and y!\n", 39);
 			exit (1);
 		}
->>>>>>> 635520af2c35131eb3be5106e23d95ad2825ea80
         data.x = ft_atoi(argv[2]);
         data.y = ft_atoi(argv[3]);
         ft_julia(data, x, y);
