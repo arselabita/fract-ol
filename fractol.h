@@ -45,7 +45,7 @@ typedef struct s_fractal
 } t_fractal;
 
 void    input_validity(t_data *data, int argc, char **argv);
-void	ft_mandelbrot(t_data *data);
-void	ft_julia(t_data *data, int x, int y);
+void ft_mandelbrot(t_fractal *fract);
+void ft_julia(t_fractal *fract, double param1, double param2);
 
 #endif

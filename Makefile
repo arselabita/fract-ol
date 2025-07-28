@@ -26,7 +26,17 @@ OFILES = $(CFILES:.c=.o)
 LIBS = -lmlx -lX11 -lXext -lm
 
 all: $(NAME)
-
+	@echo ""
+	@echo "    ／＞　 フ"
+	@echo "    | 　_　_|"
+	@echo "  ／` ミ＿xノ"
+	@echo " /　　　　 |"
+	@echo "/　 ヽ　　 ﾉ"
+	@echo "│　　|　|　|"
+	@echo "／￣|　　 |　|　|"
+	@echo "(￣ヽ＿_ヽ_)__)"
+	@echo "＼二)"
+	@echo ""
 $(NAME): $(OFILES)
 	ar rcs $(NAME) $(OFILES)
 
