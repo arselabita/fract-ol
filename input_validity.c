@@ -51,7 +51,7 @@ static int	ft_atoi(const char *nptr)
 	return ((int)(num * minus));
 }
 
-void input_validity(t_data *data, int argc, char **argv)
+void input_validity(t_fractal *fract, int argc, char **argv)
 {
     if (argc < 2)
 	{
@@ -59,7 +59,7 @@ void input_validity(t_data *data, int argc, char **argv)
 		exit (1);
 	}
     if (ft_strcmp(argv[1], "Mandelbrot") == 0)
-        ft_mandelbrot(data);
+        ft_mandelbrot(fract);
     else if (ft_strcmp(argv[1], "Julia") == 0)
     {
         if (argc < 4)
@@ -67,9 +67,11 @@ void input_validity(t_data *data, int argc, char **argv)
 			write(1, "Julia, needs two parameters, x and y!\n", 39);
 			exit (1);
 		}
-        data->x = ft_atoi(argv[2]);
-        data->y = ft_atoi(argv[3]);
-        ft_julia(data, data->x, data->y);
+		double param1 = ft_atof(argv[2]);
+		double param2 = ft_atof(argv[3]);
+        fract->x = param1;
+        fract->y = param2;
+        ft_julia(fract, param1, param2);
     }
     else
     {

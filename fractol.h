@@ -32,9 +32,17 @@ typedef struct s_data
     void *mlx;
     void *win;
     t_img img;
-	int x;
-	int y;
+    int i;
 }   t_data;
+
+typedef struct s_fractal
+{
+    t_data *data; // pointer to rendering info
+    double x;
+    double y;
+    double z;
+
+} t_fractal;
 
 void    input_validity(t_data *data, int argc, char **argv);
 void	ft_mandelbrot(t_data *data);

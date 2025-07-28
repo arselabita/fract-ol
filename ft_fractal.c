@@ -13,11 +13,20 @@
 #include "fractol.h"
 #include <stdio.h>
 
-void ft_mandelbrot(t_data *data)
+void ft_mandelbrot(t_fractal *fract)
 {
-    printf("mandelbdsdrot");
+    // if z goes to infinity
+    if (fract->z > pow(10, 8))
+    {
+        // color the pixel with sp,e color (render code here)
+    }
+    // if z fails to go to infinity
+    else
+    {
+        // color the pixel black or continue iteration
+    }
 }
-void ft_julia(t_data *data, int x, int y)
+void ft_julia(t_fractal *fract, double param1, double param2)
 {
     printf("juldddia");
 }

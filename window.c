@@ -37,17 +37,14 @@ static int keyhandler(int key, t_data *data)
 
 void init_window_and_display(t_data data)
 {
-    int i;
-
     data.mlx = mlx_init(); 
     data.win = mlx_new_window(data.mlx, 1100, 800, "The Fract-ol"); 
     data.img.img =  mlx_new_image(data.mlx, 1100, 800); 
     data.img.addr = mlx_get_data_addr(data.img.img, &data.img.bpp, \
 									  &data.img.linelen, &data.img.endian);
-
-    i = -1;
-    while (++i < 1100)
-        my_pixel_put(data.img, i, 10, 0xFFFFFFFF);
+    data.i = -1;
+    while (++data.i < 1100)
+        my_pixel_put(data.img, data.i, 10, 0xFFFFFFFF);
     mlx_put_image_to_window(data.mlx, data.win, data.img.img, 0, 0);
     mlx_hook(data.win, 2, 1L << 0, keyhandler, &data);
     mlx_hook(data.win, 17, 1L << 2, ft_exit, &data);
