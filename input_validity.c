@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   input_validity.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abita <abita@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/26 20:59:28 by abita             #+#    #+#             */
-/*   Updated: 2025/07/26 21:09:02 by abita            ###   ########.fr       */
+/*   Created: 2025/07/28 17:43:19 by abita             #+#    #+#             */
+/*   Updated: 2025/07/28 17:43:23 by abita            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,43 +25,43 @@ static int	ft_strcmp(char *s1, char *s2)
 	}
 	return (0);
 }
+static void parse_integer_part(const char *nptr, t_atof *a)
+{
+	while ((nptr[a->i] >= '\t' && nptr[a->i] <= '\r') || nptr[a->i] == ' ')
+		a->i++;
+	if (nptr[a->i] == '-' || nptr[a->i] == '+')
+	{
+		if (nptr[a->i] == '-')
+			a->sign = -1;
+		a->i++;
+	}
+	while (nptr[a->i] >= '0' && nptr[a->i] <= '9')
+	{
+		a->result = a->result * 10.0 + (nptr[a->i] - '0');
+		a->i++;
+	}
+}
 static double	ft_atof(const char *nptr)
 {
-	double	result;
-	double	factor;
-	int			sign;
-	int		i;
+	t_atof a;
 
-	sign = 1;
-	result = 0.0;
-	factor = 0.1;
-	i = 0.0;
-	while ((nptr[i] >= '\t' && nptr[i] <= '\r') || nptr[i] == ' ')
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	a.sign = 1;
+	a.result = 0.0;
+	a.factor = 0.1;
+	a.i = 0.0;
+	parse_integer_part(nptr, &a);
+	if (nptr[a.i] == '.')
 	{
-		if (nptr[i] == '-')
-			sign = -1;
-		i++;
-	}
-	while (nptr[i] >= '0' && nptr[i] <= '9')
-	{
-		result = result * 10.0 + (nptr[i] - '0');
-		i++;
-	}
-	if (nptr[i] == '.')
-	{
-		i++;
-		while (nptr[i] >= '0' && nptr[i] <= '9')
+		a.i++;
+		while (nptr[a.i] >= '0' && nptr[a.i] <= '9')
 		{
-			result += (nptr[i] - '0') * factor;
-			factor *= 0.1;
-			i++;
+			a.result += (nptr[a.i] - '0') * a.factor;
+			a.factor *= 0.1;
+			a.i++;
 		}
 	}
-	return (result * sign);
+	return (a.result * a.sign);
 }
-
 void input_validity(t_fractal *fract, int argc, char **argv)
 {
     if (argc < 2)
@@ -78,11 +78,9 @@ void input_validity(t_fractal *fract, int argc, char **argv)
 			write(1, "Julia, needs two parameters, x and y!\n", 39);
 			exit (1);
 		}
-		double param1 = ft_atof(argv[2]);
-		double param2 = ft_atof(argv[3]);
-        fract->x = param1;
-        fract->y = param2;
-        ft_julia(fract, param1, param2);
+        fract->x = ft_atof(argv[2]);
+        fract->y = ft_atof(argv[3]);
+        ft_julia(fract, fract->x, fract->y);
     }
     else
     {

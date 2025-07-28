@@ -25,6 +25,7 @@ OFILES = $(CFILES:.c=.o)
 # MLX and math libraries
 LIBS = -lmlx -lX11 -lXext -lm
 
+#the cat ~ might delete later!!
 all: $(NAME)
 	@echo ""
 	@echo "    ／＞　 フ"
@@ -37,6 +38,7 @@ all: $(NAME)
 	@echo "(￣ヽ＿_ヽ_)__)"
 	@echo "＼二)"
 	@echo ""
+
 $(NAME): $(OFILES)
 	ar rcs $(NAME) $(OFILES)
 

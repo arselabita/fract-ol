@@ -11,22 +11,18 @@
 /* ************************************************************************** */
 
 #include "fractol.h"
-
 /*
 * You have two separate things:
 *   t_data: Handles MLX window, rendering, and images
 *   t_fractal: Handles logic for fractals (zoom, iterations, etc.)
 */
-
 int main(int argc, char **argv)
 {
     t_data data;
     t_fractal fract;
 
     init_window_and_display(&data);
-    //link the fractal to window
-    fract.data = &data;
+    fract.data = &data; //link the fractal to window
     input_validity(&fract, argc, argv);
-    
     return (0);
 }

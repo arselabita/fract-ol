@@ -35,6 +35,14 @@ typedef struct s_data
     int i;
 }   t_data;
 
+typedef struct s_atof
+{
+    double	result;
+	double	factor;
+	int		sign;
+	int		i;
+} t_atof;
+
 typedef struct s_fractal
 {
     t_data *data; // pointer to rendering info
@@ -44,8 +52,8 @@ typedef struct s_fractal
 
 } t_fractal;
 
-void    input_validity(t_data *data, int argc, char **argv);
-void ft_mandelbrot(t_fractal *fract);
-void ft_julia(t_fractal *fract, double param1, double param2);
+void    input_validity(t_fractal *fract, int argc, char **argv);
+void    ft_mandelbrot(t_fractal *fract);
+void    ft_julia(t_fractal *fract, double param1, double param2);
 
 #endif
