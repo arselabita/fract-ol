@@ -10,16 +10,20 @@
 #                                                                              #
 # **************************************************************************** #
 
+# the compiler flags
 CC = cc
-
 CFLAGS = -Wall -Wextra -Werror
 
-CFILES = \
-	main.c 
+# executable name
+NAME = fractol
 
+# source to bject files
+CFILES = \
+	main.c input_validity.c mandelbrot.c julia.c window.c
 OFILES = $(CFILES:.c=.o)
 
-NAME = fractol.a
+# MLX and math libraries
+LIBS = -lmlx -lX11 -lXext -lm
 
 all: $(NAME)
 

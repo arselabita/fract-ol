@@ -25,30 +25,41 @@ static int	ft_strcmp(char *s1, char *s2)
 	}
 	return (0);
 }
-static int	ft_atoi(const char *nptr)
+static double	ft_atof(const char *nptr)
 {
-	long	num;
-	int		minus;
+	double	result;
+	double	factor;
+	int			sign;
 	int		i;
 
-	minus = 1;
-	num = 0;
-	i = 0;
+	sign = 1;
+	result = 0.0;
+	factor = 0.1;
+	i = 0.0;
 	while ((nptr[i] >= '\t' && nptr[i] <= '\r') || nptr[i] == ' ')
 		i++;
 	if (nptr[i] == '-' || nptr[i] == '+')
 	{
 		if (nptr[i] == '-')
-			minus = -1;
+			sign = -1;
 		i++;
 	}
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		num *= 10;
-		num += nptr[i] - '0';
+		result = result * 10.0 + (nptr[i] - '0');
 		i++;
 	}
-	return ((int)(num * minus));
+	if (nptr[i] == '.')
+	{
+		i++;
+		while (nptr[i] >= '0' && nptr[i] <= '9')
+		{
+			result += (nptr[i] - '0') * factor;
+			factor *= 0.1;
+			i++;
+		}
+	}
+	return (result * sign);
 }
 
 void input_validity(t_fractal *fract, int argc, char **argv)
