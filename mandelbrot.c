@@ -16,12 +16,15 @@
 
 void ft_mandelbrot(t_fractal *fract)
 {
-    fract->a = 0;
-    fract->b = 0;
+    fract->c = 0;
+    fract->z = 0;
     fract->i = 0;
     fract->max_iter = 1000;
     while (fract->i < fract->max_iter)
     {
-
+        fract->z = pow(fract->z, 2) + fract->c;
+        if (abs(fract->z) > 2)
+            break;
+        fract->i++;
     }
 }

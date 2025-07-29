@@ -46,13 +46,12 @@ typedef struct s_atof
 typedef struct s_fractal
 {
     t_data *data; // pointer to rendering info
-    double a;
-    double b;
-    int x;
-    int y;
-    int i;
-    int max_iter;
-    double z;
+    double c;
+    double z; // complex num
+    int x; // param 1
+    int y; // param 2
+    int i; // index
+    int max_iter; 
 
 } t_fractal;
 
