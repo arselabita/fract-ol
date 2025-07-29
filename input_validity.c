@@ -75,12 +75,12 @@ void input_validity(t_fractal *fract, int argc, char **argv)
     {
         if (argc < 4)
 		{
-			write(1, "Julia, needs two parameters, x and y!\n", 39);
+			write(1, "Julia, needs two parameters, a and b!\n", 39);
 			exit (1);
 		}
-        fract->x = ft_atof(argv[2]);
-        fract->y = ft_atof(argv[3]);
-        ft_julia(fract, fract->x, fract->y);
+        fract->a = ft_atof(argv[2]);
+        fract->b = ft_atof(argv[3]);
+        ft_julia(fract, fract->a, fract->b);
     }
     else
     {
