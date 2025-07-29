@@ -16,14 +16,13 @@
 
 void ft_mandelbrot(t_fractal *fract)
 {
+    fract->a = 0;
+    fract->b = 0;
+    fract->iteration = 0;
+    fract->max_iter = 1000;
     // if z goes to infinity
-    if (fract->z > pow(10, 8))
+    while (fract->z > pow(10, 8) && fract->iteration < fract->max_iter)
     {
-        // color the pixel with sp,e color (render code here)
     }
-    // if z fails to go to infinity
-    else
-    {
-        // color the pixel black or continue iteration
-    }
+
 }

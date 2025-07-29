@@ -48,6 +48,10 @@ typedef struct s_fractal
     t_data *data; // pointer to rendering info
     double x;
     double y;
+    int a;
+    int b;
+    int iteration;
+    int max_iter;
     double z;
 
 } t_fractal;
