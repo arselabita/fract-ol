@@ -38,8 +38,8 @@ static int keyhandler(int key, t_data *data)
 void init_window_and_display(t_data *data)
 {
     data->mlx = mlx_init(); 
-    data->win = mlx_new_window(data->mlx, 1100, 800, "The Fract-ol"); 
-    data->img.img =  mlx_new_image(data->mlx, 1100, 800); 
+    data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "The Fract-ol"); 
+    data->img.img =  mlx_new_image(data->mlx, WIDTH, HEIGHT); 
     data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bpp, \
 									  &data->img.linelen, &data->img.endian);
     data->i = -1;

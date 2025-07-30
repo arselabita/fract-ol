@@ -12,6 +12,8 @@
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
+# define WIDTH 1100
+# define HEIGHT 800
 
 #include <mlx.h>
 #include <unistd.h>

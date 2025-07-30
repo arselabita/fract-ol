@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <stdio.h>
 
 void complex(t_complex z)
 {
@@ -19,11 +18,10 @@ void complex(t_complex z)
  
     result.real = (z.real * z.real) - (z.imag * z.imag);
     result.imag = 2 * z.real * z.imag;
-    fract->z = temp;
 }
 double magnitude(t_fractal *fract)
 {
-    return (sqrt((fract->z * fract->z) + (fract->c * fract->c)));
+    return (sqrt((z * fract->z) + (fract->c * fract->c)));
 } 
 int ft_mandelbrot(t_fractal *fract)
 {
@@ -34,11 +32,11 @@ int ft_mandelbrot(t_fractal *fract)
     while (fract->i < fract->max_iter)
     {
         fract->z = complex(fract->z * fract->z) + fract->c;
+        my_pixel_put(fract->data->img, fract->data->i, 10, 0xFFFFFFFF);
         if (abs(fract->z) > 2)
             break;
         fract->i++;
     }
-
     return (fract->i);
 }
 
@@ -48,13 +46,13 @@ void render()
     int j;
 
     i = 0;
-    while (i < width)
+    while (i < WIDTH)
     {
         j = 0;
-        while (j < height)
+        while (j < HEIGHT)
         {
-            double a = (double)(i - (width / 2)) / (double)(width / 4);
-            double b = (double)(i - (height / 2)) / (double)(height / 4);
+            double a = (double)(i - (WIDTH / 2)) / (double)(WIDTH / 4);
+            double b = (double)(i - (HEIGHT / 2)) / (double)(HEIGHT / 4);
             j++;
         }
         i++;
