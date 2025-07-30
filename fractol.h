@@ -46,17 +46,24 @@ typedef struct s_atof
 typedef struct s_fractal
 {
     t_data *data; // pointer to rendering info
-    double c;
-    double z; // complex num
-    int x; // param 1
-    int y; // param 2
+    t_complex c; // complex num c point in fractal plane
+    t_complex z; // complex num z iteration var
+    int p1; // param 1
+    int p2; // param 2
     int i; // index
-    int max_iter; 
-
+    int max_iter;
 } t_fractal;
+
+typedef struct s_complex
+{
+    double real;
+    double imag;
+} t_complex;
 
 void    input_validity(t_fractal *fract, int argc, char **argv);
 void    ft_mandelbrot(t_fractal *fract);
 void    ft_julia(t_fractal *fract, double param1, double param2);
+void    init_window_and_display(t_data *data);
+
 
 #endif

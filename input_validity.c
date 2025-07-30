@@ -78,9 +78,9 @@ void input_validity(t_fractal *fract, int argc, char **argv)
 			write(1, "Julia, needs two parameters, a and b!\n", 39);
 			exit (1);
 		}
-        fract->a = ft_atof(argv[2]);
-        fract->b = ft_atof(argv[3]);
-        ft_julia(fract, fract->a, fract->b);
+        fract->p1 = ft_atof(argv[2]);
+        fract->p2 = ft_atof(argv[3]);
+        ft_julia(fract, fract->p1, fract->p2);
     }
     else
     {
