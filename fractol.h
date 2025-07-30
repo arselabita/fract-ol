@@ -45,6 +45,12 @@ typedef struct s_atof
 	int		i;
 } t_atof;
 
+typedef struct s_complex
+{
+    double real;
+    double imag;
+} t_complex;
+
 typedef struct s_fractal
 {
     t_data *data; // pointer to rendering info
@@ -54,13 +60,8 @@ typedef struct s_fractal
     int p2; // param 2
     int i; // index
     int max_iter;
+    int color;
 } t_fractal;
-
-typedef struct s_complex
-{
-    double real;
-    double imag;
-} t_complex;
 
 void    input_validity(t_fractal *fract, int argc, char **argv);
 void    ft_mandelbrot(t_fractal *fract);

@@ -12,49 +12,58 @@
 
 #include "fractol.h"
 
-void complex(t_complex z)
+t_complex complex_square(t_complex z)
 {
     t_complex result;
  
     result.real = (z.real * z.real) - (z.imag * z.imag);
     result.imag = 2 * z.real * z.imag;
+    return (result);
 }
-double magnitude(t_fractal *fract)
+double magnitude(t_complex z)
 {
-    return (sqrt((z * fract->z) + (fract->c * fract->c)));
+    return (sqrt(z.real * z.real + z.imag * z.imag));
 } 
 int ft_mandelbrot(t_fractal *fract)
 {
-    fract->z.real = 0;
-    fract->c.imag = 0;
-    fract->i = 0;
+    t_complex temp;
+    double real;
+    double imag;
+    int x;
+    int y;
+
     fract->max_iter = 50;
-    while (fract->i < fract->max_iter)
+    x = 0;
+    while (x < WIDTH)
     {
-        fract->z = complex(fract->z * fract->z) + fract->c;
-        my_pixel_put(fract->data->img, fract->data->i, 10, 0xFFFFFFFF);
-        if (abs(fract->z) > 2)
-            break;
-        fract->i++;
-    }
-    return (fract->i);
-}
-
-void render()
-{
-    int i;
-    int j;
-
-    i = 0;
-    while (i < WIDTH)
-    {
-        j = 0;
-        while (j < HEIGHT)
+        y = 0;
+        while (y < HEIGHT)
         {
-            double a = (double)(i - (WIDTH / 2)) / (double)(WIDTH / 4);
-            double b = (double)(i - (HEIGHT / 2)) / (double)(HEIGHT / 4);
-            j++;
+            real = (double)(x - (WIDTH / 2)) / (double)(WIDTH / 4);
+            imag = (double)(y - (HEIGHT / 2)) / (double)(HEIGHT / 4);
+            fract->z.real = real;
+            fract->c.imag = imag;
+            fract->z.real = 0;
+            fract->c.imag = 0;
+            fract->i = 0;
+            while (fract->i < fract->max_iter)
+            {
+                temp = complex_square(fract->z);
+                fract->z.real = temp.real + fract->c.real;
+                fract->z.imag = temp.imag + fract->c.imag;
+                if (magnitude(fract->z) > 2.0)
+                    break;
+                fract->i++;
+            }
+            if (fract->i == fract->max_iter)
+                fract->color = 0x00000000;
+            else
+                fract->color = 0xFFFFFF * fract->i / fract->max_iter; 
+            my_pixel_put(fract->data->img, x, y, fract->color);
+            y++;
         }
-        i++;
+        x++;
     }
+    mlx_put_image_to_window(fract->data->mlx, fract->data->win, fract->data->img.img, 0, 0);
+    return (0);
 }
