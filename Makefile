@@ -12,7 +12,7 @@
 
 # the compiler flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
 # executable name
 NAME = fractol
@@ -25,22 +25,10 @@ OFILES = $(CFILES:.c=.o)
 # MLX and math libraries
 LIBS = -lmlx -lX11 -lXext -lm
 
-#the cat ~ might delete later!!
 all: $(NAME)
-	@echo ""
-	@echo "    ／＞　 フ"
-	@echo "    | 　_　_|"
-	@echo "  ／` ミ＿xノ"
-	@echo " /　　　　 |"
-	@echo "/　 ヽ　　 ﾉ"
-	@echo "│　　|　|　|"
-	@echo "／￣|　　 |　|　|"
-	@echo "(￣ヽ＿_ヽ_)__)"
-	@echo "＼二)"
-	@echo ""
 
 $(NAME): $(OFILES)
-	ar rcs $(NAME) $(OFILES)
+	$(CC) $(CFLAGS) -o $(NAME) $(OFILES) $(LIBS)
 
 clean:
 	rm -f $(OFILES)

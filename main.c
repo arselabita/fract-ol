@@ -24,5 +24,6 @@ int main(int argc, char **argv)
     init_window_and_display(&data);
     fract.data = &data; //link the fractal to window
     input_validity(&fract, argc, argv);
+    start_loop(&data);
     return (0);
 }

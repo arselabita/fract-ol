@@ -21,10 +21,13 @@ static int ft_exit(t_data *data)
     exit(0);
     return (0);
 }
-static void    my_pixel_put(t_img img, int x, int y, int color)
+void    my_pixel_put(t_img img, int x, int y, int color)
 {
     char* dest;
 
+    if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+        return;
+    
     dest = img.addr + (y * img.linelen + x * (img.bpp / 8));
     *(unsigned int*)dest = color;
 }
@@ -34,19 +37,37 @@ static int keyhandler(int key, t_data *data)
         ft_exit(data);
     return (0);
 }
-
+void start_loop(t_data *data)
+{
+    mlx_hook(data->win, 2, 1L << 0, keyhandler, data);
+    mlx_hook(data->win, 17, 1L << 2, ft_exit, data);
+    mlx_loop(data->mlx);
+}
 void init_window_and_display(t_data *data)
 {
-    data->mlx = mlx_init(); 
+    data->mlx = mlx_init();
+    if (!data->mlx)
+    {
+        write(2, "mlx_init failed\n", 16);
+        exit(1);
+    }
     data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "The Fract-ol"); 
-    data->img.img =  mlx_new_image(data->mlx, WIDTH, HEIGHT); 
+    if (!data->win)
+    {
+        write(2, "mlx_new_window failed\n", 23);
+        exit(1);
+    }
+    data->img.img = mlx_new_image(data->mlx, WIDTH, HEIGHT); 
+    if (!data->img.img)
+    {
+        write(2, "mlx_new_image failed\n", 22);
+        exit(1);
+    }
     data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bpp, \
 									  &data->img.linelen, &data->img.endian);
-    data->i = -1;
-    while (++data->i < 1100)
-        my_pixel_put(data->img, data->i, 10, 0xFFFFFFFF);
-    mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
-    mlx_hook(data->win, 2, 1L << 0, keyhandler, &data);
-    mlx_hook(data->win, 17, 1L << 2, ft_exit, &data);
-    mlx_loop(data->mlx);
+    if (!data->img.addr)
+    {
+        write(2, "mlx_get_data_addr failed\n", 26);
+        exit(1);
+    }
 }

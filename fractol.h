@@ -19,6 +19,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <math.h>
 
 typedef struct s_img
 {
@@ -64,9 +65,12 @@ typedef struct s_fractal
 } t_fractal;
 
 void    input_validity(t_fractal *fract, int argc, char **argv);
-void    ft_mandelbrot(t_fractal *fract);
+int     ft_mandelbrot(t_fractal *fract);
 void    ft_julia(t_fractal *fract, double param1, double param2);
 void    init_window_and_display(t_data *data);
+void    start_loop(t_data *data);
+void    my_pixel_put(t_img img, int x, int y, int color);
+
 
 
 #endif
