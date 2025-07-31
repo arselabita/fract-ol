@@ -12,7 +12,7 @@
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
-# define WIDTH 1100
+# define WIDTH 800
 # define HEIGHT 800
 
 #include <mlx.h>
@@ -67,8 +67,7 @@ typedef struct s_fractal
 void    input_validity(t_fractal *fract, int argc, char **argv);
 int     ft_mandelbrot(t_fractal *fract);
 void    ft_julia(t_fractal *fract, double param1, double param2);
-void    init_window_and_display(t_data *data);
-void    start_loop(t_data *data);
+void    init_window_and_display(t_data *data, t_fractal *fract);
 void    my_pixel_put(t_img img, int x, int y, int color);
 
 
