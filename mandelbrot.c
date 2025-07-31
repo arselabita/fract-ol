@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-t_complex complex_square(t_complex z)
+static t_complex complex_square(t_complex z)
 {
     t_complex result;
  
@@ -20,15 +20,15 @@ t_complex complex_square(t_complex z)
     result.imag = 2 * z.real * z.imag;
     return (result);
 }
-double magnitude(t_complex z)
+static double magnitude(t_complex z)
 {
     return (sqrt(z.real * z.real + z.imag * z.imag));
 }
 static void mandelbrot_init_coords(t_fractal *fract, int x, int y)
 {
     fract->z.real = 0;
-    fract->c.imag = 0; 
-    fract->z.real= (double)(x - (WIDTH / 2)) / (WIDTH / 4);
+    fract->z.imag = 0; 
+    fract->c.real= (double)(x - (WIDTH / 2)) / (WIDTH / 4);
     fract->c.imag = (double)(y - (HEIGHT / 2)) / (HEIGHT / 4);
 }
 static int mandelbrot_iterate(t_fractal *fract)
@@ -44,19 +44,21 @@ static int mandelbrot_iterate(t_fractal *fract)
         fract->z.imag = temp.imag + fract->c.imag;
         if (magnitude(fract->z) > 2.0)
             break;
-        fract->i++;
-        }
+        i++;
+    }
+    if (i == fract->max_iter)
+        fract->color = 0x00000000; // black color
+    else
+        fract->color = (i * 255 / fract->max_iter) * 0x050505;
     return (i);
 }
 int ft_mandelbrot(t_fractal *fract)
 {
-    t_complex temp;
     int x;
     int y;
 
     fract->max_iter = 50;
     x = 0;
-    my_pixel_put(fract->data->img, 100, 100, 0xFFFFFF);
     while (x < WIDTH)
     {
         y = 0;
@@ -64,11 +66,6 @@ int ft_mandelbrot(t_fractal *fract)
         {
             mandelbrot_init_coords(fract, x, y);
             fract->i = mandelbrot_iterate(fract);
-            
-            if (fract->i == fract->max_iter)
-                fract->color = 0x00000000; // black color
-            else
-                fract->color = (fract->i * 255 / fract->max_iter) * 0x050505; 
             my_pixel_put(fract->data->img, x, y, fract->color);
             y++;
         }
