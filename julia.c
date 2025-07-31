@@ -10,11 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "fractol.h"
-#include <stdio.h>
 
 void ft_julia(t_fractal *fract, double param1, double param2)
 {
-    printf("juldddia");
+    
 }
