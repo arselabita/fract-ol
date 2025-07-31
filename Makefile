@@ -19,7 +19,12 @@ NAME = fractol
 
 # source to bject files
 CFILES = \
-	main.c input_validity.c mandelbrot.c julia.c window.c
+	main.c \
+	input_validity.c \
+	mandelbrot.c \
+	julia.c \
+	window.c
+
 OFILES = $(CFILES:.c=.o)
 
 # MLX and math libraries
