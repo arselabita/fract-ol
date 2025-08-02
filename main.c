@@ -24,8 +24,6 @@ int main(int argc, char **argv)
     fract.data = &data; //link the fractal to window
     init_window_and_display(&data);
     input_validity(&fract, argc, argv);
-    mlx_hook(data.win, 2, 1L << 0, keyhandler, &data);
-    mlx_hook(data.win, 17, 1L << 2, ft_exit, &data);
-    mlx_loop(data.mlx);
+    mlx_loop_helper(&data);
     return (0);
 }

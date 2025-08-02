@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-int ft_exit(t_data *data)
+static int ft_exit(t_data *data)
 {
     mlx_destroy_image(data->mlx, data->img.img);
     mlx_destroy_window(data->mlx, data->win);
@@ -21,7 +21,7 @@ int ft_exit(t_data *data)
     exit(0);
     return (0);
 }
-void    my_pixel_put(t_img img, int x, int y, int color)
+static void    my_pixel_put(t_img img, int x, int y, int color)
 {
     char* dest;
     if (x < 0 || y < 0 || x >= WIDTH || y >= HEIGHT || !img.addr)
@@ -29,11 +29,17 @@ void    my_pixel_put(t_img img, int x, int y, int color)
     dest = img.addr + (y * img.linelen + x * (img.bpp / 8));
     *(unsigned int*)dest = color;
 }
-int keyhandler(int key, t_data *data)
+static int keyhandler(int key, t_data *data)
 {
     if (key == 65307)
         ft_exit(data);
     return (0);
+}
+void mlx_loop_helper(t_data *data)
+{
+    mlx_hook(data->win, 2, 1L << 0, keyhandler, data);
+    mlx_hook(data->win, 17, 1L << 2, ft_exit, data);
+    mlx_loop(data->mlx);
 }
 void init_window_and_display(t_data *data)
 {
@@ -42,9 +48,4 @@ void init_window_and_display(t_data *data)
     data->img.img = mlx_new_image(data->mlx, WIDTH, HEIGHT); 
     data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bpp, \
 									  &data->img.linelen, &data->img.endian);
-    // ft_mandelbrot(fract);
-    // ft_julia(fract, fract->p1, fract->p2);
-    // mlx_hook(data->win, 2, 1L << 0, keyhandler, data);
-    // mlx_hook(data->win, 17, 1L << 2, ft_exit, data);
-    // mlx_loop(data->mlx);
 }
