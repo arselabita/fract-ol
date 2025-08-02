@@ -12,15 +12,6 @@
 
 #include "fractol.h"
 
-static t_complex complex_square(t_complex z)
-{
-    t_complex result;
- 
-    result.real = (z.real * z.real) - (z.imag * z.imag);
-    result.imag = 2 * z.real * z.imag;
-    return (result);
-}
-
 // i do this to compute distance form the origin, like the pythagorean theorem
 // when the sum of the squares of teh real and imag parts exceed 4 the 
 // point has exceeded 4  
@@ -28,12 +19,13 @@ static double magnitude(t_complex z)
 {
     return (sqrt(z.real * z.real + z.imag * z.imag));
 }
-static void mandelbrot_init_coords(t_fractal *fract, int x, int y)
+static t_complex complex_square(t_complex z)
 {
-    fract->z.real = 0;
-    fract->z.imag = 0; 
-    fract->c.real= (double)(x - (WIDTH / 2)) / (WIDTH / 4);
-    fract->c.imag = (double)(y - (HEIGHT / 2)) / (HEIGHT / 4);
+    t_complex result;
+ 
+    result.real = (z.real * z.real) - (z.imag * z.imag);
+    result.imag = 2 * z.real * z.imag;
+    return (result);
 }
 static int mandelbrot_iterate(t_fractal *fract)
 {
@@ -51,10 +43,17 @@ static int mandelbrot_iterate(t_fractal *fract)
         i++;
     }
     if (i == fract->max_iter)
-        fract->color = 0x00000000; // black color
+        fract->color = BLACK; // black color
     else
         fract->color = ((i + 1) * 255 / fract->max_iter) * 0x00025F;
     return (i);
+}
+static void mandelbrot_init_coords(t_fractal *fract, int x, int y)
+{
+    fract->z.real = 0;
+    fract->z.imag = 0; 
+    fract->c.real= (double)(x - (WIDTH / 2)) / (WIDTH / 4);
+    fract->c.imag = (double)(y - (HEIGHT / 2)) / (HEIGHT / 4);
 }
 int ft_mandelbrot(t_fractal *fract)
 {

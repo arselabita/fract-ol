@@ -14,6 +14,7 @@
 # define FRACTOL_H
 # define WIDTH 800
 # define HEIGHT 800
+# define BLACK 0x00000000
 
 #include <mlx.h>
 #include <unistd.h>
@@ -57,8 +58,8 @@ typedef struct s_fractal
     t_data *data; // pointer to rendering info
     t_complex c; // complex num c point in fractal plane
     t_complex z; // complex num z iteration var
-    int p1; // param 1
-    int p2; // param 2
+    double p1; // param 1
+    double p2; // param 2
     int i; // index
     int max_iter;
     int color;
@@ -66,10 +67,10 @@ typedef struct s_fractal
 
 void    input_validity(t_fractal *fract, int argc, char **argv);
 int     ft_mandelbrot(t_fractal *fract);
-void    ft_julia(t_fractal *fract, double param1, double param2);
-void    init_window_and_display(t_data *data, t_fractal *fract);
+int     ft_julia(t_fractal *fract, double param1, double param2);
+void    init_window_and_display(t_data *data);
 void    my_pixel_put(t_img img, int x, int y, int color);
-
-
+int     keyhandler(int key, t_data *data);
+int     ft_exit(t_data *data);
 
 #endif
