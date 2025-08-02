@@ -21,19 +21,19 @@ static int ft_exit(t_data *data)
     exit(0);
     return (0);
 }
-static void    my_pixel_put(t_img img, int x, int y, int color)
+static int keyhandler(int key, t_data *data)
+{
+    if (key == 65307)
+        ft_exit(data);
+    return (0);
+}
+void    my_pixel_put(t_img img, int x, int y, int color)
 {
     char* dest;
     if (x < 0 || y < 0 || x >= WIDTH || y >= HEIGHT || !img.addr)
         return;
     dest = img.addr + (y * img.linelen + x * (img.bpp / 8));
     *(unsigned int*)dest = color;
-}
-static int keyhandler(int key, t_data *data)
-{
-    if (key == 65307)
-        ft_exit(data);
-    return (0);
 }
 void mlx_loop_helper(t_data *data)
 {
