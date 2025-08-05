@@ -19,11 +19,10 @@ static int ft_exit(t_data *data)
     mlx_destroy_display(data->mlx);
     free(data->mlx);
     exit(0);
-    return (0);
 }
 static int keyhandler(int key, t_data *data)
 {
-    if (key == 65307)
+    if (key == ESC)
         ft_exit(data);
     return (0);
 }
@@ -35,8 +34,20 @@ void    my_pixel_put(t_img img, int x, int y, int color)
     dest = img.addr + (y * img.linelen + x * (img.bpp / 8));
     *(unsigned int*)dest = color;
 }
+int mouse_hook(int button, int x, int y, t_fractal *fract)
+{
+    (void)x;
+    (void)y;
+    if (button == 4)
+        fract->zoom *= 0.9;
+    else if (button == 5)
+        fract->zoom *= 0.9;
+    return (0);
+}
+
 void mlx_loop_helper(t_data *data)
 {
+    mlx_mouse_hook(data->win, mouse_hook, data);
     mlx_hook(data->win, 2, 1L << 0, keyhandler, data);
     mlx_hook(data->win, 17, 1L << 2, ft_exit, data);
     mlx_loop(data->mlx);
@@ -44,8 +55,8 @@ void mlx_loop_helper(t_data *data)
 void init_window_and_display(t_data *data)
 {
     data->mlx = mlx_init();
-    data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "The Fract-ol"); 
-    data->img.img = mlx_new_image(data->mlx, WIDTH, HEIGHT); 
+    data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "The Fract-ol");
+    data->img.img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
     data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bpp, \
 									  &data->img.linelen, &data->img.endian);
 }

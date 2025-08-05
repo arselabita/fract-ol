@@ -45,22 +45,22 @@ static int mandelbrot_iterate(t_fractal *fract)
     if (i == fract->max_iter)
         fract->color = BLACK; // black color
     else
-        fract->color = ((i + 1) * 255 / fract->max_iter) * 0x00025F;
+        fract->color = ((i + 1) * 255 / fract->max_iter) * BLUE;
     return (i);
 }
 static void mandelbrot_init_coords(t_fractal *fract, int x, int y)
 {
     fract->z.real = 0;
-    fract->z.imag = 0; 
-    fract->c.real= (double)(x - (WIDTH / 2)) / (WIDTH / 4);
-    fract->c.imag = (double)(y - (HEIGHT / 2)) / (HEIGHT / 4);
+    fract->z.imag = 0;
+    fract->c.real= (double)(x - (WIDTH / 2)) / (WIDTH / fract->zoom);
+    fract->c.imag = (double)(y - (HEIGHT / 2)) / (HEIGHT / fract->zoom);
 }
 int ft_mandelbrot(t_fractal *fract)
 {
     int x;
     int y;
 
-    fract->max_iter = 100;
+    fract->max_iter = 80;
     x = 0;
     while (x < WIDTH)
     {

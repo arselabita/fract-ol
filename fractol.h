@@ -12,9 +12,18 @@
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
+
 # define WIDTH 800
 # define HEIGHT 800
+
+# define ESC 65307
+# define LEFT 65361
+# define RIGHT 65363
+# define UP 65362
+# define DOWN 65364
+
 # define BLACK 0x00000000
+# define BLUE 0x00025F
 
 #include <mlx.h>
 #include <unistd.h>
@@ -63,6 +72,7 @@ typedef struct s_fractal
     int i; // index
     int max_iter;
     int color;
+    double zoom;
 } t_fractal;
 
 void    input_validity(t_fractal *fract, int argc, char **argv);

@@ -43,13 +43,13 @@ static int julia_iterate(t_fractal *fract)
     if (i == fract->max_iter)
         fract->color = BLACK;
     else
-        fract->color = ((i + 1) * 255 / fract->max_iter) * 0x00025F;
+        fract->color = ((i + 1) * 255 / fract->max_iter) * BLUE;
     return (i);
 }
 static void julia_init_coords(t_fractal *fract, int x, int y)
 {
-    fract->z.real= (double)(x - WIDTH / 2) / (WIDTH / 4);
-    fract->z.imag = (double)(y - HEIGHT / 2) / (HEIGHT / 4);
+    fract->z.real= (double)(x - WIDTH / 2) / (WIDTH / 4) * fract->zoom;
+    fract->z.imag = (double)(y - HEIGHT / 2) / (HEIGHT / 4) * fract->zoom;
 }
 int ft_julia(t_fractal *fract, double param1, double param2)
 {
