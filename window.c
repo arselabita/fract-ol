@@ -38,17 +38,29 @@ int mouse_hook(int button, int x, int y, t_fractal *fract)
 {
     (void)x;
     (void)y;
-    fract->zoom = 1.0;
+
     if (button == 4)
         fract->zoom *= 0.9;
     else if (button == 5)
-        fract->zoom *= 0.9;
-    return (fract->zoom);
+        fract->zoom /= 0.9;
+    ft_mandelbrot(fract);
+    return (0);
+}
+int color_func(int key, t_fractal *fract)
+{
+    if (key == 0x0072)
+    {
+        fract->color2 = RED;
+        ft_mandelbrot(fract);
+    }
+        
+    return (0);
 }
 
-void mlx_loop_helper(t_data *data)
+void mlx_loop_helper(t_data *data, t_fractal *fract)
 {
-    mlx_mouse_hook(data->win, mouse_hook, data);
+    mlx_mouse_hook(data->win, mouse_hook, fract);
+    mlx_key_hook(data->win, color_func, fract);
     mlx_hook(data->win, 2, 1L << 0, keyhandler, data);
     mlx_hook(data->win, 17, 1L << 2, ft_exit, data);
     mlx_loop(data->mlx);

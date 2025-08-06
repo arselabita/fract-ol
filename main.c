@@ -21,9 +21,10 @@ int main(int argc, char **argv)
     t_data data;
     t_fractal fract;
 
+    fract.zoom = 1.0;
     fract.data = &data; //link the fractal to window
     init_window_and_display(&data);
     input_validity(&fract, argc, argv);
-    mlx_loop_helper(&data);
+    mlx_loop_helper(&data, &fract);
     return (0);
 }

@@ -24,6 +24,7 @@
 
 # define BLACK 0x00000000
 # define BLUE 0x00025F
+# define RED 0xFF0000
 
 #include <mlx.h>
 #include <unistd.h>
@@ -72,6 +73,7 @@ typedef struct s_fractal
     int i; // index
     int max_iter;
     int color;
+    int color2;
     double zoom;
 } t_fractal;
 
@@ -80,6 +82,8 @@ int     ft_mandelbrot(t_fractal *fract);
 int     ft_julia(t_fractal *fract, double param1, double param2);
 void    init_window_and_display(t_data *data);
 void    my_pixel_put(t_img img, int x, int y, int color);
-void    mlx_loop_helper(t_data *data);
+void    mlx_loop_helper(t_data *data, t_fractal *fract);
+int color_func(int key, t_fractal *fract);
+
 
 #endif
