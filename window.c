@@ -38,11 +38,12 @@ int mouse_hook(int button, int x, int y, t_fractal *fract)
 {
     (void)x;
     (void)y;
+    fract->zoom = 1.0;
     if (button == 4)
         fract->zoom *= 0.9;
     else if (button == 5)
         fract->zoom *= 0.9;
-    return (0);
+    return (fract->zoom);
 }
 
 void mlx_loop_helper(t_data *data)
