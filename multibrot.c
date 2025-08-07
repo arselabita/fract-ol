@@ -20,14 +20,21 @@ static double magnitude(t_complex z)
 static t_complex complex_square(t_complex z)
 {
     t_complex result;
- 
-    result.real = (z.real * z.real) - (z.imag * z.imag);
-    result.imag = 2 * z.real * z.imag;
+    
+    double x;
+    double y;
+
+    x = 6 * ((z.real * z.real) * (z.imag * z.imag));
+    y = (z.imag * z.imag * z.imag * z.imag);
+    result.real = (z.real * z.real * z.real * z.real) - x + y;
+    result.imag = (4 * ((z.real * z.real * z.real) * (z.imag))) - \
+        (4 * ((z.real) * (z.imag * z.imag * z.imag)));
     return (result);
 }
 int multibrot_iterate(t_fractal *fract)
 {
     t_complex temp;
+    
     int i;
 
     i = 0;

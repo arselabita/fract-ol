@@ -13,9 +13,17 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define WIDTH 500
-# define HEIGHT 500
-# define SCALE_FACTOR 4
+# define WIDTH 800
+# define HEIGHT 800
+# define SCALE_FACTOR 5
+
+# define MANDELBROT 1
+# define JULIA 3 
+# define MULTIBROT 4
+
+# define ERROR_CHOOSE write (1, "Choose a fractal: 'Mandelbrot' or 'Julia'", 41)
+# define ERROR_ARGS write(1, "Julia, needs two parameters, a and b!\n", 39)
+# define ERROR_INPUT write(1, "Please input the right fractal type: Mandelbrot or Julia\n", 58)
  
 # define ESC 65307
 # define LEFT 65361
@@ -32,6 +40,7 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <math.h>
+#include "../Libft/libft.h"
 
 typedef struct s_data t_data;
 typedef struct s_fractal t_fractal;
@@ -54,14 +63,6 @@ typedef struct s_data
     t_fractal *fract;
 }   t_data;
 
-typedef struct s_atof
-{
-    double	result;
-	double	factor;
-	int		sign;
-	int		i;
-} t_atof;
-
 typedef struct s_complex
 {
     double real;
@@ -75,6 +76,7 @@ typedef struct s_fractal
     t_complex z; // complex num z iteration var
     double p1; // param 1
     double p2; // param 2
+    double denom;
     int i; // index
     int max_iter;
     int color;
@@ -96,9 +98,6 @@ void    mlx_loop_helper(t_data *data, t_fractal *fract);
 int     color_func(int key, t_fractal *fract);
 
 int     render_fract(t_fractal *fract, char **argv);
-
-int	    ft_strcmp(char *s1, char *s2);
-double	ft_atof(const char *nptr);
 
 void julia_init_coords(t_fractal *fract, int x, int y);
 int julia_iterate(t_fractal *fract);

@@ -30,11 +30,11 @@ void    my_pixel_put(t_img img, int x, int y, int color)
 }
 void fract_type(t_fractal *fract)
 {
-    if (fract->return_f == 1)
+    if (fract->return_f == MANDELBROT)
         ft_mandelbrot(fract);
-    else if (fract->return_f == 2)
+    else if (fract->return_f == JULIA)
         ft_julia(fract, fract->p1, fract->p2);
-    else if (fract->return_f == 3)
+    else if (fract->return_f == MULTIBROT)
         ft_multibrot(fract);
 }
 static int keyhandler(int key, t_data *data)
@@ -43,7 +43,7 @@ static int keyhandler(int key, t_data *data)
     double move_speed;
     double step;
 
-    step = 5.0;
+    step = 10.0;
     move_speed = step / (WIDTH / (SCALE_FACTOR * fract->zoom));
     if (key == ESC)
         ft_exit(data);

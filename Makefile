@@ -16,13 +16,14 @@ CFLAGS = -Wall -Wextra -Werror -fsanitize=address,leak,undefined -g3
 
 # executable name
 NAME = fractol
-
+LIBFT = ../Libft/libft.a
 # source to bject files
 CFILES = \
 	main.c \
 	input_validity.c \
 	mandelbrot.c \
 	julia.c \
+	multibrot.c \
 	window.c
 
 OFILES = $(CFILES:.c=.o)
@@ -32,14 +33,19 @@ LIBS = -lmlx -lX11 -lXext -lm
 
 all: $(NAME)
 
-$(NAME): $(OFILES)
-	$(CC) $(CFLAGS) -o $(NAME) $(OFILES) $(LIBS)
+$(NAME): $(OFILES) $(LIBFT)
+	$(CC) $(CFLAGS) -o $(NAME) $(OFILES) $(LIBS) $(LIBFT)
+
+$(LIBFT):
+	make -C ../Libft
 
 clean:
 	rm -f $(OFILES)
+	make -C ../Libft clean
 
 fclean: clean 
 	rm -f $(NAME)
+	make -C ../Libft fclean
 
 re: fclean all
 

@@ -10,86 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"	
+#include "fractol.h"
+#include "../Libft/libft.h"
 
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] || s2[i])
-	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		i++;
-	}
-	return (0);
-}
-static void parse_integer_part(const char *nptr, t_atof *a)
-{
-	while ((nptr[a->i] >= '\t' && nptr[a->i] <= '\r') || nptr[a->i] == ' ')
-		a->i++;
-	if (nptr[a->i] == '-' || nptr[a->i] == '+')
-	{
-		if (nptr[a->i] == '-')
-			a->sign = -1;
-		a->i++;
-	}
-	while (nptr[a->i] >= '0' && nptr[a->i] <= '9')
-	{
-		a->result = a->result * 10.0 + (nptr[a->i] - '0');
-		a->i++;
-	}
-}
-double	ft_atof(const char *nptr)
-{
-	t_atof a;
-
-	a.sign = 1;
-	a.result = 0.0;
-	a.factor = 0.1;
-	a.i = 0.0;
-	parse_integer_part(nptr, &a);
-	if (nptr[a.i] == '.')
-	{
-		a.i++;
-		while (nptr[a.i] >= '0' && nptr[a.i] <= '9')
-		{
-			a.result += (nptr[a.i] - '0') * a.factor;
-			a.factor *= 0.1;
-			a.i++;
-		}
-	}
-	return (a.result * a.sign);
-}
 int input_validity(t_fractal *fract, int argc, char **argv)
 {
     if (argc < 2)
-	{
-		write (1, "Choose a fractal: 'Mandelbrot' or 'Julia'", 41);
-		exit (1);
-	}
+		return (ERROR_CHOOSE, 2);
     if (ft_strcmp(argv[1], "Mandelbrot") == 0)
-		return (ft_mandelbrot(fract), 1);
+		return (ft_mandelbrot(fract), MANDELBROT);
     else if (ft_strcmp(argv[1], "Julia") == 0)
     {
         if (argc < 4)
-		{
-			write(1, "Julia, needs two parameters, a and b!\n", 39);
-			exit (1);
-		}
+			return (ERROR_ARGS, JULIA);
 		fract->p1 = ft_atof(argv[2]);
         fract->p2 = ft_atof(argv[3]);
-		return (ft_julia(fract, fract->p1, fract->p2), 2);
+		return (ft_julia(fract, fract->p1, fract->p2), JULIA);
     }
 	else if (ft_strcmp(argv[1], "Multibrot") == 0)
-	{
-		return (ft_multibrot(fract), 3);
-	}
+		return (ft_multibrot(fract), MULTIBROT);
     else
-    {
-		write(1, "Please input the right fractal type: Mandelbrot or Julia\n", 58);
-		exit(1);
-	}
+		return (ERROR_INPUT, 2);
 	return (0);
 }

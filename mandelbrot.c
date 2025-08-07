@@ -43,7 +43,7 @@ int mandelbrot_iterate(t_fractal *fract)
         i++;
     }
     if (i == fract->max_iter)
-        fract->color = BLACK; // black color
+        fract->color = BLACK;
     else
         fract->color = ((i + 1) * 255 / fract->max_iter) * BLUE;
     return (i);
@@ -77,4 +77,3 @@ int ft_mandelbrot(t_fractal *fract)
         fract->data->img.img, 0, 0);
     return (0);
 }
-
