@@ -39,16 +39,10 @@
 // letter keys
 # define I_KEY 0x0069
 # define D_KEY 0x0064
-# define R_KEY 0x52
-# define P_KEY 0x50
-# define N_KEY 0x4E
 
 // colors
 # define BLACK 0x00000000
 # define BLUE 0x00025F
-# define PURPLE 0XAF69EE
-# define PINK 0xFDE6FA1
-# define RED 0xC21807
 
 // libraries
 #include <mlx.h>
@@ -112,7 +106,8 @@ typedef struct s_color
 
 
 // parsing
-int    input_validity(t_fractal *fract, int argc, char **argv);
+int     input_validity(t_fractal *fract, int argc, char **argv);
+void    var_init(t_fractal *fract);
 
 // the fractals
 int     ft_mandelbrot(t_fractal *fract);
@@ -124,7 +119,6 @@ void    init_window_and_display(t_data *data);
 void    my_pixel_put(t_img img, int x, int y, int color);
 void    mlx_loop_helper(t_data *data, t_fractal *fract);
 int     keyhandler(int key, t_data *data);
-void    keyhandler_color(int key, t_fractal *fract);
 void    keyhandler_iter(int key, t_fractal *fract);
 void    fract_type(t_fractal *fract);
 int     mouse_hook(int button, int x, int y, t_fractal *fract);

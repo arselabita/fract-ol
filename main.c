@@ -21,16 +21,11 @@ int main(int argc, char **argv)
     t_data data;
     t_fractal fract;
 
-    fract.max_iter = 80;
-    fract.zoom = 1.0;
-    fract.move_x = 0.0;
-    fract.move_y = 0.0;
-    fract.base_color = BLUE;
     fract.data = &data; //link the fractal to window
     data.fract = &fract;
+    var_init(&fract);
     init_window_and_display(&data);
     fract.return_f = input_validity(&fract, argc, argv);
     mlx_loop_helper(&data, &fract);
-
     return (0);
 }

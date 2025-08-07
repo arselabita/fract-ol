@@ -37,23 +37,15 @@ t_complex complex_square_m(t_complex z)
 }
 void ft_color_fract(t_fractal *fract, int i)
 {
-    t_color renk;
-    int intensity;
-
-    renk.r = 0;
-    renk.g = 0;
-    renk.b = 0;
     if (i == fract->max_iter)
-    {
         fract->color = BLACK;
-        return ;
-    }
-    intensity = ((i + 1) * 255 / fract->max_iter) * fract->base_color;
-    if (fract->base_color & 0xFF0000)
-        renk.r = intensity;
-    else if (fract->base_color & 0x00FF00)
-        renk.g = intensity;
-    else if (fract->base_color & 0x0000FF)
-        renk.b = intensity;        
-    fract->color = (renk.r << 16) | (renk.g >> 8) | renk.b;
+    else        
+        fract->color = ((i + 1) * 255 / fract->max_iter) * BLUE;
+}
+void var_init(t_fractal *fract)
+{
+    fract->max_iter = 80;
+    fract->zoom = 1.0;
+    fract->move_x = 0.0;
+    fract->move_y = 0.0;
 }

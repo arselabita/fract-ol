@@ -40,15 +40,7 @@ void keyhandler_iter(int key, t_fractal *fract)
     else if (key == D_KEY)
         fract->max_iter -= 10;
 }
-void keyhandler_color(int key, t_fractal *fract)
-{
-    if (key == R_KEY)
-        fract->base_color = RED;
-    else if (key == P_KEY)
-        fract->base_color = PURPLE;
-    else if (key == N_KEY)
-        fract->base_color = PINK;
-}
+
 int keyhandler(int key, t_data *data)
 {
     t_fractal *fract = data->fract;
@@ -67,7 +59,6 @@ int keyhandler(int key, t_data *data)
         fract->move_y -= move_speed;
     else if (key == DOWN)
         fract->move_y += move_speed;
-    keyhandler_color(key, fract);
     keyhandler_iter(key, fract);
     fract_type(fract);
     return (0);
