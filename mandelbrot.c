@@ -52,8 +52,8 @@ void mandelbrot_init_coords(t_fractal *fract, int x, int y)
 {
     fract->z.real = 0;
     fract->z.imag = 0;
-    fract->c.real= (double)(x - (WIDTH / 2)) / (WIDTH / (4 * fract->zoom));
-    fract->c.imag = (double)(y - (HEIGHT / 2)) / (HEIGHT / (4 * fract->zoom));
+    fract->c.real= ((double)(x - (WIDTH / 2)) / (WIDTH / (SCALE_FACTOR * fract->zoom))) + fract->move_x;
+    fract->c.imag = ((double)(y - (HEIGHT / 2)) / (HEIGHT / (SCALE_FACTOR * fract->zoom))) + fract->move_y;
 }
 int ft_mandelbrot(t_fractal *fract)
 {

@@ -48,8 +48,8 @@ int julia_iterate(t_fractal *fract)
 }
 void julia_init_coords(t_fractal *fract, int x, int y)
 {
-    fract->z.real= (double)(x - (WIDTH / 2)) / (WIDTH / (4 * fract->zoom));
-    fract->z.imag = (double)(y - (HEIGHT / 2)) / (HEIGHT / (4 * fract->zoom));
+    fract->z.real= ((double)(x - (WIDTH / 2)) / (WIDTH / (SCALE_FACTOR * fract->zoom))) + fract->move_x;
+    fract->z.imag = ((double)(y - (HEIGHT / 2)) / (HEIGHT / (SCALE_FACTOR * fract->zoom))) + fract->move_y;
 }
 int ft_julia(t_fractal *fract, double param1, double param2)
 {

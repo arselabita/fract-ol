@@ -15,11 +15,12 @@
 
 # define WIDTH 800
 # define HEIGHT 800
-
+# define SCALE_FACTOR 4
+ 
 # define ESC 65307
 # define LEFT 65361
-# define RIGHT 65363
 # define UP 65362
+# define RIGHT 65363
 # define DOWN 65364
 
 # define BLACK 0x00000000
@@ -32,22 +33,6 @@
 #include <limits.h>
 #include <math.h>
 
-typedef struct s_img
-{
-    void* img;
-    char* addr;
-    int linelen;
-    int bpp;
-    int endian;
-}   t_img;
-
-typedef struct s_data
-{
-    void *mlx;
-    void *win;
-    t_img img;
-    int i;
-}   t_data;
 
 typedef struct s_atof
 {
@@ -74,8 +59,28 @@ typedef struct s_fractal
     int max_iter;
     int color;
     int return_f;
+    double move_x;
+    double move_y;
     double zoom;
 } t_fractal;
+
+typedef struct s_img
+{
+    void* img;
+    char* addr;
+    int linelen;
+    int bpp;
+    int endian;
+}   t_img;
+
+typedef struct s_data
+{
+    void *mlx;
+    void *win;
+    t_img img;
+    int i;
+    t_fractal *fract;
+}   t_data;
 
 int    input_validity(t_fractal *fract, int argc, char **argv);
 int     ft_mandelbrot(t_fractal *fract);
@@ -95,11 +100,5 @@ double	ft_atof(const char *nptr);
 
 void julia_init_coords(t_fractal *fract, int x, int y);
 int julia_iterate(t_fractal *fract);
-
-
-
-
-
-
 
 #endif

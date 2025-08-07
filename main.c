@@ -22,10 +22,13 @@ int main(int argc, char **argv)
     t_fractal fract;
 
     fract.zoom = 1.0;
+    fract.move_x = 0.0;
+    fract.move_y = 0.0;
     fract.data = &data; //link the fractal to window
+    data.fract = &fract;
     init_window_and_display(&data);
-    input_validity(&fract, argc, argv);
     fract.return_f = input_validity(&fract, argc, argv);
     mlx_loop_helper(&data, &fract);
+
     return (0);
 }

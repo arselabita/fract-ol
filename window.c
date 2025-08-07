@@ -20,12 +20,6 @@ static int ft_exit(t_data *data)
     free(data->mlx);
     exit(0);
 }
-static int keyhandler(int key, t_data *data)
-{
-    if (key == ESC)
-        ft_exit(data);
-    return (0);
-}
 void    my_pixel_put(t_img img, int x, int y, int color)
 {
     char* dest;
@@ -34,7 +28,28 @@ void    my_pixel_put(t_img img, int x, int y, int color)
     dest = img.addr + (y * img.linelen + x * (img.bpp / 8));
     *(unsigned int*)dest = color;
 }
+static int keyhandler(int key, t_data *data)
+{
+    t_fractal *fract = data->fract;
+    double move_speed;
 
+    move_speed = 0.1 / fract->zoom;
+    if (key == ESC)
+        ft_exit(data);
+    else if (key == LEFT)
+        fract->move_x -= move_speed;
+    else if (key == RIGHT)
+        fract->move_x += move_speed;
+    else if (key == UP)
+        fract->move_y -= move_speed;
+    else if (key == DOWN)
+        fract->move_y += move_speed;
+    if (fract->return_f == 1)
+        ft_mandelbrot(fract);
+    else if (fract->return_f == 2)
+        ft_julia(fract, fract->p1, fract->p2);
+    return (0);
+}
 int mouse_hook(int button, int x, int y, t_fractal *fract)
 {
     (void)x;
@@ -59,23 +74,9 @@ int mouse_hook(int button, int x, int y, t_fractal *fract)
     return (0);
 } */
 
-int key_hook(int key, t_fractal *fract)
-{
-    if (key == LEFT)
-        fract->zoom *= 1;
-    else if (key == RIGHT)
-        fract->zoom *= 1;
-    else if (key == UP)
-        fract->zoom *= 1;
-    else if (key == DOWN)
-        fract->zoom *= 1;
-    return (0);
-}
-
 void mlx_loop_helper(t_data *data, t_fractal *fract)
 {
     mlx_mouse_hook(data->win, mouse_hook, fract);
-    mlx_key_hook(data->win, key_hook, fract);
     mlx_hook(data->win, 2, 1L << 0, keyhandler, data);
     mlx_hook(data->win, 17, 1L << 2, ft_exit, data);
     mlx_loop(data->mlx);
