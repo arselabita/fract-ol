@@ -21,10 +21,6 @@
 # define JULIA 3 
 # define MULTIBROT 4
 
-# define ERROR_CHOOSE write (1, "Choose a fractal: 'Mandelbrot' or 'Julia'", 41)
-# define ERROR_ARGS write(1, "Julia, needs two parameters, a and b!\n", 39)
-# define ERROR_INPUT write(1, "Please input the right fractal type: Mandelbrot or Julia\n", 58)
- 
 # define ESC 65307
 # define LEFT 65361
 # define UP 65362

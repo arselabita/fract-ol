@@ -16,7 +16,6 @@ static double magnitude(t_complex z)
 {
     return (sqrt(z.real * z.real + z.imag * z.imag));
 }
-
 static t_complex complex_square(t_complex z)
 {
     t_complex result;
