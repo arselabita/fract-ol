@@ -12,19 +12,12 @@
 
 #include "fractol.h"
 
-static double magnitude(t_complex z)
+static void julia_init_coords(t_fractal *fract, int x, int y)
 {
-    return (sqrt(z.real * z.real + z.imag * z.imag));
+    fract->z.real= ((double)(x - (WIDTH / 2)) / (WIDTH / (SCALE_FACTOR * fract->zoom))) + fract->move_x;
+    fract->z.imag = ((double)(y - (HEIGHT / 2)) / (HEIGHT / (SCALE_FACTOR * fract->zoom))) + fract->move_y;
 }
-static t_complex complex_square(t_complex z)
-{
-    t_complex result;
-
-    result.real = (z.real * z.real) - (z.imag * z.imag);
-    result.imag = 2 * z.real * z.imag;
-    return (result);
-}
-int julia_iterate(t_fractal *fract)
+static int julia_iterate(t_fractal *fract)
 {
     t_complex temp;
     t_color renk;
@@ -40,20 +33,8 @@ int julia_iterate(t_fractal *fract)
             break;
         i++;
     }
-    if (i == fract->max_iter)
-        fract->color = BLACK;
-    else
-    {
-        fract->intensity = ((i + 1) * 255 / fract->max_iter) * fract->base_color;
-        color_range(fract, renk);
-        fract->color = (renk.r << 16) | (renk.g >> 8) | renk.b;
-    }
+    ft_color_fract(fract, i);
     return (i);
-}
-void julia_init_coords(t_fractal *fract, int x, int y)
-{
-    fract->z.real= ((double)(x - (WIDTH / 2)) / (WIDTH / (SCALE_FACTOR * fract->zoom))) + fract->move_x;
-    fract->z.imag = ((double)(y - (HEIGHT / 2)) / (HEIGHT / (SCALE_FACTOR * fract->zoom))) + fract->move_y;
 }
 int ft_julia(t_fractal *fract, double param1, double param2)
 {

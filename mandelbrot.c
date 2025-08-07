@@ -12,20 +12,12 @@
 
 #include "fractol.h"
 
-// i do this to compute distance form the origin, like the pythagorean theorem
-// when the sum of the squares of teh real and imag parts exceed 4 the 
-// point has exceeded 4  
-
 int mandelbrot_iterate(t_fractal *fract)
 {
     t_complex temp;
-    t_color renk;
     int i;
 
     i = 0;
-    renk.r = 0;
-    renk.g = 0;
-    renk.b = 0;
     while (i < fract->max_iter)
     {
         temp = complex_square(fract->z);
@@ -35,7 +27,7 @@ int mandelbrot_iterate(t_fractal *fract)
             break;
         i++;
     }
-    ft_color_fract(fract, renk, i);
+    ft_color_fract(fract, i);
     return (i);
 }
 void mandelbrot_init_coords(t_fractal *fract, int x, int y)

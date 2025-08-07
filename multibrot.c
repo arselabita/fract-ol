@@ -12,22 +12,14 @@
 
 #include "fractol.h"
 
-static double magnitude(t_complex z)
+static void multibrot_init_coords(t_fractal *fract, int x, int y)
 {
-    return (sqrt(z.real * z.real + z.imag * z.imag));
+    fract->z.real = 0;
+    fract->z.imag = 0;
+    fract->c.real= ((double)(x - (WIDTH / 2)) / (WIDTH / (SCALE_FACTOR * fract->zoom))) + fract->move_x;
+    fract->c.imag = ((double)(y - (HEIGHT / 2)) / (HEIGHT / (SCALE_FACTOR * fract->zoom))) + fract->move_y;
 }
-static t_complex complex_square(t_complex z)
-{
-    t_complex result;
-    
-    result.real = (z.real * z.real * z.real * z.real) - \
-        6 * ((z.real * z.real) * (z.imag * z.imag)) + \
-        (z.imag * z.imag * z.imag * z.imag);
-    result.imag = (4 * ((z.real * z.real * z.real) * (z.imag))) - \
-        (4 * ((z.real) * (z.imag * z.imag * z.imag)));
-    return (result);
-}
-int multibrot_iterate(t_fractal *fract)
+static int  multibrot_iterate(t_fractal *fract)
 {
     t_complex temp;
     t_color renk;
@@ -43,22 +35,8 @@ int multibrot_iterate(t_fractal *fract)
             break;
         i++;
     }
-    if (i == fract->max_iter)
-        fract->color = BLACK;
-    else
-    {
-        fract->intensity = ((i + 1) * 255 / fract->max_iter) * fract->base_color;
-        color_range(fract, renk);
-        fract->color = (renk.r << 16) | (renk.g >> 8) | renk.b;
-    }
+    ft_color_fract(fract, i);
     return (i);
-}
-void multibrot_init_coords(t_fractal *fract, int x, int y)
-{
-    fract->z.real = 0;
-    fract->z.imag = 0;
-    fract->c.real= ((double)(x - (WIDTH / 2)) / (WIDTH / (SCALE_FACTOR * fract->zoom))) + fract->move_x;
-    fract->c.imag = ((double)(y - (HEIGHT / 2)) / (HEIGHT / (SCALE_FACTOR * fract->zoom))) + fract->move_y;
 }
 int ft_multibrot(t_fractal *fract)
 {
