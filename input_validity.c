@@ -82,6 +82,10 @@ int input_validity(t_fractal *fract, int argc, char **argv)
         fract->p2 = ft_atof(argv[3]);
 		return (ft_julia(fract, fract->p1, fract->p2), 2);
     }
+	else if (ft_strcmp(argv[1], "Multibrot") == 0)
+	{
+		return (ft_multibrot(fract), 3);
+	}
     else
     {
 		write(1, "Please input the right fractal type: Mandelbrot or Julia\n", 58);
