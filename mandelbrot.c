@@ -27,12 +27,11 @@ static t_complex complex_square(t_complex z)
     result.imag = 2 * z.real * z.imag;
     return (result);
 }
-static int mandelbrot_iterate(t_fractal *fract)
+int mandelbrot_iterate(t_fractal *fract)
 {
     t_complex temp;
     int i;
 
-    fract->color2 = BLUE;
     i = 0;
     while (i < fract->max_iter)
     {
@@ -46,10 +45,10 @@ static int mandelbrot_iterate(t_fractal *fract)
     if (i == fract->max_iter)
         fract->color = BLACK; // black color
     else
-        fract->color = ((i + 1) * 255 / fract->max_iter) * fract->color2;
+        fract->color = ((i + 1) * 255 / fract->max_iter) * BLUE;
     return (i);
 }
-static void mandelbrot_init_coords(t_fractal *fract, int x, int y)
+void mandelbrot_init_coords(t_fractal *fract, int x, int y)
 {
     fract->z.real = 0;
     fract->z.imag = 0;
@@ -61,7 +60,7 @@ int ft_mandelbrot(t_fractal *fract)
     int x;
     int y;
 
-    fract->max_iter = 20;
+    fract->max_iter = 80;
     x = 0;
     while (x < WIDTH)
     {
@@ -79,3 +78,4 @@ int ft_mandelbrot(t_fractal *fract)
         fract->data->img.img, 0, 0);
     return (0);
 }
+

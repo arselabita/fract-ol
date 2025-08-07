@@ -12,7 +12,7 @@
 
 #include "fractol.h"	
 
-static int	ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
 
@@ -41,7 +41,7 @@ static void parse_integer_part(const char *nptr, t_atof *a)
 		a->i++;
 	}
 }
-static double	ft_atof(const char *nptr)
+double	ft_atof(const char *nptr)
 {
 	t_atof a;
 
@@ -62,7 +62,7 @@ static double	ft_atof(const char *nptr)
 	}
 	return (a.result * a.sign);
 }
-void input_validity(t_fractal *fract, int argc, char **argv)
+int input_validity(t_fractal *fract, int argc, char **argv)
 {
     if (argc < 2)
 	{
@@ -70,7 +70,7 @@ void input_validity(t_fractal *fract, int argc, char **argv)
 		exit (1);
 	}
     if (ft_strcmp(argv[1], "Mandelbrot") == 0)
-        ft_mandelbrot(fract);
+		return (ft_mandelbrot(fract), 1);
     else if (ft_strcmp(argv[1], "Julia") == 0)
     {
         if (argc < 4)
@@ -78,13 +78,14 @@ void input_validity(t_fractal *fract, int argc, char **argv)
 			write(1, "Julia, needs two parameters, a and b!\n", 39);
 			exit (1);
 		}
-        fract->p1 = ft_atof(argv[2]);
+		fract->p1 = ft_atof(argv[2]);
         fract->p2 = ft_atof(argv[3]);
-        ft_julia(fract, fract->p1, fract->p2);
+		return (ft_julia(fract, fract->p1, fract->p2), 2);
     }
     else
     {
 		write(1, "Please input the right fractal type: Mandelbrot or Julia\n", 58);
 		exit(1);
 	}
+	return (0);
 }

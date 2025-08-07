@@ -25,7 +25,7 @@ static t_complex complex_square(t_complex z)
     result.imag = 2 * z.real * z.imag;
     return (result);
 }
-static int julia_iterate(t_fractal *fract)
+int julia_iterate(t_fractal *fract)
 {
     t_complex temp;
     int i;
@@ -46,7 +46,7 @@ static int julia_iterate(t_fractal *fract)
         fract->color = ((i + 1) * 255 / fract->max_iter) * BLUE;
     return (i);
 }
-static void julia_init_coords(t_fractal *fract, int x, int y)
+void julia_init_coords(t_fractal *fract, int x, int y)
 {
     fract->z.real= (double)(x - (WIDTH / 2)) / (WIDTH / (4 * fract->zoom));
     fract->z.imag = (double)(y - (HEIGHT / 2)) / (HEIGHT / (4 * fract->zoom));

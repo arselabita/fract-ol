@@ -13,8 +13,8 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define WIDTH 800
-# define HEIGHT 800
+# define WIDTH 500
+# define HEIGHT 500
 
 # define ESC 65307
 # define LEFT 65361
@@ -73,17 +73,33 @@ typedef struct s_fractal
     int i; // index
     int max_iter;
     int color;
-    int color2;
+    int return_f;
     double zoom;
 } t_fractal;
 
-void    input_validity(t_fractal *fract, int argc, char **argv);
+int    input_validity(t_fractal *fract, int argc, char **argv);
 int     ft_mandelbrot(t_fractal *fract);
 int     ft_julia(t_fractal *fract, double param1, double param2);
 void    init_window_and_display(t_data *data);
 void    my_pixel_put(t_img img, int x, int y, int color);
+
+
 void    mlx_loop_helper(t_data *data, t_fractal *fract);
-int color_func(int key, t_fractal *fract);
+
+int     color_func(int key, t_fractal *fract);
+
+int     render_fract(t_fractal *fract, char **argv);
+
+int	    ft_strcmp(char *s1, char *s2);
+double	ft_atof(const char *nptr);
+
+void julia_init_coords(t_fractal *fract, int x, int y);
+int julia_iterate(t_fractal *fract);
+
+
+
+
+
 
 
 #endif
