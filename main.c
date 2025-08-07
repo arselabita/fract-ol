@@ -21,6 +21,7 @@ int main(int argc, char **argv)
     t_data data;
     t_fractal fract;
 
+    fract.max_iter = 80;
     fract.zoom = 1.0;
     fract.move_x = 0.0;
     fract.move_y = 0.0;
