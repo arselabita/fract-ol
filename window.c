@@ -43,7 +43,7 @@ int mouse_hook(int button, int x, int y, t_fractal *fract)
         fract->zoom *= 0.9;
     else if (button == 5)
         fract->zoom /= 0.9;
-    ft_mandelbrot(fract);
+    //ft_mandelbrot(fract);
     return (0);
 }
 /* int color_func(int key, t_fractal *fract)

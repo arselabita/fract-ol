@@ -61,7 +61,7 @@ int ft_mandelbrot(t_fractal *fract)
     int x;
     int y;
 
-    fract->max_iter = 80;
+    fract->max_iter = 20;
     x = 0;
     while (x < WIDTH)
     {
