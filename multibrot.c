@@ -44,7 +44,7 @@ int multibrot_iterate(t_fractal *fract)
         i++;
     }
     if (i == fract->max_iter)
-        fract->color = BLACK; // black color
+        fract->color = BLACK;
     else
         fract->color = ((i + 1) * 255 / fract->max_iter) * BLUE;
     return (i);
