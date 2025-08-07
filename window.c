@@ -62,13 +62,13 @@ int mouse_hook(int button, int x, int y, t_fractal *fract)
 int key_hook(int key, t_fractal *fract)
 {
     if (key == LEFT)
-        fract->zoom = 0.9;
+        fract->zoom *= 1;
     else if (key == RIGHT)
-        fract->zoom = 0.9;
+        fract->zoom *= 1;
     else if (key == UP)
-        fract->zoom *= 0.9;
+        fract->zoom *= 1;
     else if (key == DOWN)
-        fract->zoom *= 0.9;
+        fract->zoom *= 1;
     return (0);
 }
 
@@ -83,8 +83,16 @@ void mlx_loop_helper(t_data *data, t_fractal *fract)
 void init_window_and_display(t_data *data)
 {
     data->mlx = mlx_init();
+    if (!data->mlx)
+        exit (1);
     data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "The Fract-ol");
+    if (!data->win)
+        exit (1);
     data->img.img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+    if (!data->img.img)
+        exit (1);
     data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bpp, \
 									  &data->img.linelen, &data->img.endian);
+    if (!data->img.addr)
+        exit (1);
 }
