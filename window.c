@@ -32,8 +32,10 @@ static int keyhandler(int key, t_data *data)
 {
     t_fractal *fract = data->fract;
     double move_speed;
+    double step;
 
-    move_speed = 0.1 / fract->zoom;
+    step = 5.0;
+    move_speed = step / (WIDTH / (SCALE_FACTOR * fract->zoom));
     if (key == ESC)
         ft_exit(data);
     else if (key == LEFT)

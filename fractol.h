@@ -13,8 +13,8 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define WIDTH 800
-# define HEIGHT 800
+# define WIDTH 500
+# define HEIGHT 500
 # define SCALE_FACTOR 4
  
 # define ESC 65307
@@ -33,6 +33,26 @@
 #include <limits.h>
 #include <math.h>
 
+typedef struct s_data t_data;
+typedef struct s_fractal t_fractal;
+
+typedef struct s_img
+{
+    void* img;
+    char* addr;
+    int linelen;
+    int bpp;
+    int endian;
+}   t_img;
+
+typedef struct s_data
+{
+    void *mlx;
+    void *win;
+    t_img img;
+    int i;
+    t_fractal *fract;
+}   t_data;
 
 typedef struct s_atof
 {
@@ -63,24 +83,6 @@ typedef struct s_fractal
     double move_y;
     double zoom;
 } t_fractal;
-
-typedef struct s_img
-{
-    void* img;
-    char* addr;
-    int linelen;
-    int bpp;
-    int endian;
-}   t_img;
-
-typedef struct s_data
-{
-    void *mlx;
-    void *win;
-    t_img img;
-    int i;
-    t_fractal *fract;
-}   t_data;
 
 int    input_validity(t_fractal *fract, int argc, char **argv);
 int     ft_mandelbrot(t_fractal *fract);
