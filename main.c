@@ -25,6 +25,7 @@ int main(int argc, char **argv)
     fract.zoom = 1.0;
     fract.move_x = 0.0;
     fract.move_y = 0.0;
+    fract.base_color = BLUE;
     fract.data = &data; //link the fractal to window
     data.fract = &fract;
     init_window_and_display(&data);

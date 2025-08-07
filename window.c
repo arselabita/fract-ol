@@ -29,6 +29,22 @@ static void fract_type(t_fractal *fract)
     else if (fract->return_f == MULTIBROT)
         ft_multibrot(fract);
 }
+static void keyhandler_iter(int key, t_fractal *fract)
+{
+    if (key == I_KEY)
+        fract->max_iter += 10;
+    else if (key == D_KEY)
+        fract->max_iter -= 10;
+}
+static void keyhandler_color(int key, t_fractal *fract)
+{
+    if (key == R_KEY)
+        fract->base_color = RED;
+    else if (key == P_KEY)
+        fract->base_color = PURPLE;
+    else if (key == N_KEY)
+        fract->base_color = PINK;
+}
 static int keyhandler(int key, t_data *data)
 {
     t_fractal *fract = data->fract;
@@ -47,10 +63,8 @@ static int keyhandler(int key, t_data *data)
         fract->move_y -= move_speed;
     else if (key == DOWN)
         fract->move_y += move_speed;
-    else if (key == I_KEY)
-        fract->max_iter += 10;
-    else if (key == D_KEY)
-        fract->max_iter -= 10;
+    keyhandler_color(key, fract);
+    keyhandler_iter(key, fract);
     fract_type(fract);
     return (0);
 }

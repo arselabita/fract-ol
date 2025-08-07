@@ -23,20 +23,32 @@
 # define JULIA 3 
 # define MULTIBROT 4
 
-// keys
+// escape key
 # define ESC 65307
+
+// arrow keys
 # define LEFT 65361
 # define UP 65362
 # define RIGHT 65363
 # define DOWN 65364
-# define I_KEY 0x0069
-# define D_KEY 0x0064
+
+// mouse scroll
 # define SCROLL_UP 4
 # define SCROLL_DOWN 5
+
+// letter keys
+# define I_KEY 0x0069
+# define D_KEY 0x0064
+# define R_KEY 0x52
+# define P_KEY 0x50
+# define N_KEY 0x4E
 
 // colors
 # define BLACK 0x00000000
 # define BLUE 0x00025F
+# define PURPLE 0XAF69EE
+# define PINK 0xFDE6FA1
+# define RED 0xC21807
 
 // libraries
 #include <mlx.h>
@@ -88,6 +100,7 @@ typedef struct s_fractal
     double move_x;
     double move_y;
     double zoom;
+    int base_color;
 } t_fractal;
 
 int    input_validity(t_fractal *fract, int argc, char **argv);
