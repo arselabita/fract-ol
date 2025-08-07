@@ -13,6 +13,12 @@
 #include "fractol.h"
 #include "../Libft/libft.h"
 
+static void param_julia(t_fractal *fract, char **argv)
+{
+	fract->p1 = ft_atof(argv[2]);
+    fract->p2 = ft_atof(argv[3]);
+}
+
 int input_validity(t_fractal *fract, int argc, char **argv)
 {
     if (argc < 2)
@@ -29,8 +35,7 @@ int input_validity(t_fractal *fract, int argc, char **argv)
 			write(2, "Julia, needs two parameters, a and b!\n", 39);
 			exit(1);
 		}
-		fract->p1 = ft_atof(argv[2]);
-        fract->p2 = ft_atof(argv[3]);
+		param_julia(fract, argv);
 		return (ft_julia(fract, fract->p1, fract->p2), JULIA);
     }
 	else if (ft_strcmp(argv[1], "Multibrot") == 0)
