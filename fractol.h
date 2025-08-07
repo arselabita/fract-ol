@@ -111,6 +111,7 @@ typedef struct s_color
     int b;
 } t_color;
 
+
 // parsing
 int    input_validity(t_fractal *fract, int argc, char **argv);
 
@@ -123,14 +124,19 @@ int     ft_multibrot(t_fractal *fract);
 void    init_window_and_display(t_data *data);
 void    my_pixel_put(t_img img, int x, int y, int color);
 void    mlx_loop_helper(t_data *data, t_fractal *fract);
+int     keyhandler(int key, t_data *data);
+void    keyhandler_color(int key, t_fractal *fract);
+void    keyhandler_iter(int key, t_fractal *fract);
+void    fract_type(t_fractal *fract);
+int     mouse_hook(int button, int x, int y, t_fractal *fract);
 
 // coloring funct
-void ft_color_fract(t_fractal *fract, int i);
-void color_range(t_fractal *fract, t_color renk);
+void    ft_color_fract(t_fractal *fract, int i);
+void    color_range(t_fractal *fract, t_color renk);
 
 // math funct
-t_complex complex_square(t_complex z);
-t_complex complex_square(t_complex z);
-double magnitude(t_complex z);
+t_complex   complex_square(t_complex z);
+t_complex   complex_square(t_complex z);
+double      magnitude(t_complex z);
 
 #endif
