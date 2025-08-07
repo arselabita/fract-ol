@@ -103,4 +103,7 @@ double	ft_atof(const char *nptr);
 void julia_init_coords(t_fractal *fract, int x, int y);
 int julia_iterate(t_fractal *fract);
 
+int ft_multibrot(t_fractal *fract);
+
+
 #endif
