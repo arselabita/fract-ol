@@ -20,15 +20,7 @@ static int ft_exit(t_data *data)
     free(data->mlx);
     exit(0);
 }
-void    my_pixel_put(t_img img, int x, int y, int color)
-{
-    char* dest;
-    if (x < 0 || y < 0 || x >= WIDTH || y >= HEIGHT || !img.addr)
-        return;
-    dest = img.addr + (y * img.linelen + x * (img.bpp / 8));
-    *(unsigned int*)dest = color;
-}
-void fract_type(t_fractal *fract)
+static void fract_type(t_fractal *fract)
 {
     if (fract->return_f == MANDELBROT)
         ft_mandelbrot(fract);
@@ -55,24 +47,33 @@ static int keyhandler(int key, t_data *data)
         fract->move_y -= move_speed;
     else if (key == DOWN)
         fract->move_y += move_speed;
-    else if (key == 0x0069)
+    else if (key == I_KEY)
         fract->max_iter += 10;
-    else if (key == 0x0064)
+    else if (key == D_KEY)
         fract->max_iter -= 10;
     fract_type(fract);
     return (0);
 }
-int mouse_hook(int button, int x, int y, t_fractal *fract)
+static int mouse_hook(int button, int x, int y, t_fractal *fract)
 {
     (void)x;
     (void)y;
 
-    if (button == 4)
+    if (button == SCROLL_UP)
         fract->zoom *= 0.9;
-    else if (button == 5)
+    else if (button == SCROLL_DOWN)
         fract->zoom /= 0.9;
     fract_type(fract);
     return (0);
+}
+void    my_pixel_put(t_img img, int x, int y, int color)
+{
+    char* dest;
+
+    if (x < 0 || y < 0 || x >= WIDTH || y >= HEIGHT || !img.addr)
+        return;
+    dest = img.addr + (y * img.linelen + x * (img.bpp / 8));
+    *(unsigned int*)dest = color;
 }
 void mlx_loop_helper(t_data *data, t_fractal *fract)
 {

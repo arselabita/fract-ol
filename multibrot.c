@@ -12,7 +12,6 @@
 
 #include "fractol.h"
 
-
 static double magnitude(t_complex z)
 {
     return (sqrt(z.real * z.real + z.imag * z.imag));
@@ -21,12 +20,9 @@ static t_complex complex_square(t_complex z)
 {
     t_complex result;
     
-    double x;
-    double y;
-
-    x = 6 * ((z.real * z.real) * (z.imag * z.imag));
-    y = (z.imag * z.imag * z.imag * z.imag);
-    result.real = (z.real * z.real * z.real * z.real) - x + y;
+    result.real = (z.real * z.real * z.real * z.real) - \
+        6 * ((z.real * z.real) * (z.imag * z.imag)) + \
+        (z.imag * z.imag * z.imag * z.imag);
     result.imag = (4 * ((z.real * z.real * z.real) * (z.imag))) - \
         (4 * ((z.real) * (z.imag * z.imag * z.imag)));
     return (result);

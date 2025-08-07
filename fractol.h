@@ -13,24 +13,32 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
+// scaling
 # define WIDTH 800
 # define HEIGHT 800
 # define SCALE_FACTOR 5
 
+// signals
 # define MANDELBROT 1
 # define JULIA 3 
 # define MULTIBROT 4
 
+// keys
 # define ESC 65307
 # define LEFT 65361
 # define UP 65362
 # define RIGHT 65363
 # define DOWN 65364
+# define I_KEY 0x0069
+# define D_KEY 0x0064
+# define SCROLL_UP 4
+# define SCROLL_DOWN 5
 
+// colors
 # define BLACK 0x00000000
 # define BLUE 0x00025F
-# define RED 0xFF0000
 
+// libraries
 #include <mlx.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -67,13 +75,13 @@ typedef struct s_complex
 
 typedef struct s_fractal
 {
-    t_data *data; // pointer to rendering info
-    t_complex c; // complex num c point in fractal plane
-    t_complex z; // complex num z iteration var
-    double p1; // param 1
-    double p2; // param 2
+    t_data *data;
+    t_complex c;
+    t_complex z;
+    double p1;
+    double p2;
     double denom;
-    int i; // index
+    int i;
     int max_iter;
     int color;
     int return_f;
@@ -83,22 +91,13 @@ typedef struct s_fractal
 } t_fractal;
 
 int    input_validity(t_fractal *fract, int argc, char **argv);
+
 int     ft_mandelbrot(t_fractal *fract);
 int     ft_julia(t_fractal *fract, double param1, double param2);
+int     ft_multibrot(t_fractal *fract);
+
 void    init_window_and_display(t_data *data);
 void    my_pixel_put(t_img img, int x, int y, int color);
-
-
 void    mlx_loop_helper(t_data *data, t_fractal *fract);
-
-int     color_func(int key, t_fractal *fract);
-
-int     render_fract(t_fractal *fract, char **argv);
-
-void julia_init_coords(t_fractal *fract, int x, int y);
-int julia_iterate(t_fractal *fract);
-
-int ft_multibrot(t_fractal *fract);
-
 
 #endif
