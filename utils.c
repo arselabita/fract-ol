@@ -24,7 +24,7 @@ t_complex complex_square(t_complex z)
     result.imag = 2 * z.real * z.imag;
     return (result);
 }
-t_complex complex_square(t_complex z)
+t_complex complex_square_m(t_complex z)
 {
     t_complex result;
     
@@ -35,28 +35,25 @@ t_complex complex_square(t_complex z)
         (4 * ((z.real) * (z.imag * z.imag * z.imag)));
     return (result);
 }
-void color_range(t_fractal *fract, t_color renk)
-{
-    if (fract->base_color & 0xFF0000)
-        renk.r = fract->intensity;
-    else if (fract->base_color & 0x00FF00)
-        renk.g = fract->intensity;
-    else if (fract->base_color & 0x0000FF)
-        renk.b = fract->intensity;        
-}
 void ft_color_fract(t_fractal *fract, int i)
 {
     t_color renk;
+    int intensity;
 
     renk.r = 0;
     renk.g = 0;
     renk.b = 0;
     if (i == fract->max_iter)
-        fract->color = BLACK;
-    else
     {
-        fract->intensity = ((i + 1) * 255 / fract->max_iter) * fract->base_color;
-        color_range(fract, renk);
-        fract->color = (renk.r << 16) | (renk.g >> 8) | renk.b;
+        fract->color = BLACK;
+        return ;
     }
+    intensity = ((i + 1) * 255 / fract->max_iter) * fract->base_color;
+    if (fract->base_color & 0xFF0000)
+        renk.r = intensity;
+    else if (fract->base_color & 0x00FF00)
+        renk.g = intensity;
+    else if (fract->base_color & 0x0000FF)
+        renk.b = intensity;        
+    fract->color = (renk.r << 16) | (renk.g >> 8) | renk.b;
 }

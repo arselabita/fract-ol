@@ -101,7 +101,6 @@ typedef struct s_fractal
     double move_y;
     double zoom;
     int base_color;
-    int intensity;
 } t_fractal;
 
 typedef struct s_color
@@ -129,14 +128,14 @@ void    keyhandler_color(int key, t_fractal *fract);
 void    keyhandler_iter(int key, t_fractal *fract);
 void    fract_type(t_fractal *fract);
 int     mouse_hook(int button, int x, int y, t_fractal *fract);
+int     ft_exit(t_data *data);
 
 // coloring funct
 void    ft_color_fract(t_fractal *fract, int i);
-void    color_range(t_fractal *fract, t_color renk);
 
 // math funct
 t_complex   complex_square(t_complex z);
-t_complex   complex_square(t_complex z);
+t_complex   complex_square_m(t_complex z);
 double      magnitude(t_complex z);
 
 #endif

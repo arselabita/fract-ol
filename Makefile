@@ -24,7 +24,9 @@ CFILES = \
 	mandelbrot.c \
 	julia.c \
 	multibrot.c \
-	window.c
+	mlx_window.c \
+	mlx_utils.c \
+	utils.c
 
 OFILES = $(CFILES:.c=.o)
 

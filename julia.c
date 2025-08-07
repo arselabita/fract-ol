@@ -20,7 +20,6 @@ static void julia_init_coords(t_fractal *fract, int x, int y)
 static int julia_iterate(t_fractal *fract)
 {
     t_complex temp;
-    t_color renk;
     int i;
 
     i = 0;

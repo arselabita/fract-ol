@@ -22,13 +22,12 @@ static void multibrot_init_coords(t_fractal *fract, int x, int y)
 static int  multibrot_iterate(t_fractal *fract)
 {
     t_complex temp;
-    t_color renk;
     int i;
 
     i = 0;
     while (i < fract->max_iter)
     {
-        temp = complex_square(fract->z);
+        temp = complex_square_m(fract->z);
         fract->z.real = temp.real + fract->c.real;
         fract->z.imag = temp.imag + fract->c.imag;
         if (magnitude(fract->z) > 2.0)
