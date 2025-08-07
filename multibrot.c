@@ -30,7 +30,7 @@ static t_complex complex_square(t_complex z)
 int multibrot_iterate(t_fractal *fract)
 {
     t_complex temp;
-    
+    t_color renk;
     int i;
 
     i = 0;
@@ -46,7 +46,11 @@ int multibrot_iterate(t_fractal *fract)
     if (i == fract->max_iter)
         fract->color = BLACK;
     else
-        fract->color = ((i + 1) * 255 / fract->max_iter) * fract->base_color;
+    {
+        fract->intensity = ((i + 1) * 255 / fract->max_iter) * fract->base_color;
+        color_range(fract, renk);
+        fract->color = (renk.r << 16) | (renk.g >> 8) | renk.b;
+    }
     return (i);
 }
 void multibrot_init_coords(t_fractal *fract, int x, int y)

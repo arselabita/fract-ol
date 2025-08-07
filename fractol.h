@@ -101,16 +101,35 @@ typedef struct s_fractal
     double move_y;
     double zoom;
     int base_color;
+    int intensity;
 } t_fractal;
 
+typedef struct s_color
+{
+    int r;
+    int g;
+    int b;
+} t_color;
+
+// parsing
 int    input_validity(t_fractal *fract, int argc, char **argv);
 
+// the fractals
 int     ft_mandelbrot(t_fractal *fract);
 int     ft_julia(t_fractal *fract, double param1, double param2);
 int     ft_multibrot(t_fractal *fract);
 
+// init window and mlx funct
 void    init_window_and_display(t_data *data);
 void    my_pixel_put(t_img img, int x, int y, int color);
 void    mlx_loop_helper(t_data *data, t_fractal *fract);
+
+// coloring funct
+void ft_color_fract(t_fractal *fract, t_color renk, int i);
+void color_range(t_fractal *fract, t_color renk);
+
+// math funct
+t_complex complex_square(t_complex z);
+double magnitude(t_complex z);
 
 #endif

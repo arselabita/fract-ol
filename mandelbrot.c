@@ -15,24 +15,17 @@
 // i do this to compute distance form the origin, like the pythagorean theorem
 // when the sum of the squares of teh real and imag parts exceed 4 the 
 // point has exceeded 4  
-static double magnitude(t_complex z)
-{
-    return (sqrt(z.real * z.real + z.imag * z.imag));
-}
-static t_complex complex_square(t_complex z)
-{
-    t_complex result;
- 
-    result.real = (z.real * z.real) - (z.imag * z.imag);
-    result.imag = 2 * z.real * z.imag;
-    return (result);
-}
+
 int mandelbrot_iterate(t_fractal *fract)
 {
     t_complex temp;
+    t_color renk;
     int i;
 
     i = 0;
+    renk.r = 0;
+    renk.g = 0;
+    renk.b = 0;
     while (i < fract->max_iter)
     {
         temp = complex_square(fract->z);
@@ -42,10 +35,7 @@ int mandelbrot_iterate(t_fractal *fract)
             break;
         i++;
     }
-    if (i == fract->max_iter)
-        fract->color = BLACK;
-    else
-        fract->color = ((i + 1) * 255 / fract->max_iter) * fract->base_color;
+    ft_color_fract(fract, renk, i);
     return (i);
 }
 void mandelbrot_init_coords(t_fractal *fract, int x, int y)
