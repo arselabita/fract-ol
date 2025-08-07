@@ -28,6 +28,15 @@ void    my_pixel_put(t_img img, int x, int y, int color)
     dest = img.addr + (y * img.linelen + x * (img.bpp / 8));
     *(unsigned int*)dest = color;
 }
+void fract_type(t_fractal *fract)
+{
+    if (fract->return_f == 1)
+        ft_mandelbrot(fract);
+    else if (fract->return_f == 2)
+        ft_julia(fract, fract->p1, fract->p2);
+    else if (fract->return_f == 3)
+        ft_multibrot(fract);
+}
 static int keyhandler(int key, t_data *data)
 {
     t_fractal *fract = data->fract;
@@ -46,10 +55,11 @@ static int keyhandler(int key, t_data *data)
         fract->move_y -= move_speed;
     else if (key == DOWN)
         fract->move_y += move_speed;
-    if (fract->return_f == 1)
-        ft_mandelbrot(fract);
-    else if (fract->return_f == 2)
-        ft_julia(fract, fract->p1, fract->p2);
+    else if (key == 0x0069)
+        fract->max_iter += 10;
+    else if (key == 0x0064)
+        fract->max_iter -= 10;
+    fract_type(fract);
     return (0);
 }
 int mouse_hook(int button, int x, int y, t_fractal *fract)
@@ -61,21 +71,9 @@ int mouse_hook(int button, int x, int y, t_fractal *fract)
         fract->zoom *= 0.9;
     else if (button == 5)
         fract->zoom /= 0.9;
-    if (fract->return_f == 1)
-        ft_mandelbrot(fract);
-    else if (fract->return_f == 2)
-        ft_julia(fract, fract->p1, fract->p2);
+    fract_type(fract);
     return (0);
 }
-
-/* int color_func(int key, t_fractal *fract)
-{
-    if (key == 0x0072)
-        fract->color2 = RED;
-    ft_mandelbrot(fract);
-    return (0);
-} */
-
 void mlx_loop_helper(t_data *data, t_fractal *fract)
 {
     mlx_mouse_hook(data->win, mouse_hook, fract);
