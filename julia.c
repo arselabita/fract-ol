@@ -58,8 +58,6 @@ int ft_julia(t_fractal *fract, double param1, double param2)
 
     fract->c.real = param1;
     fract->c.imag = param2;
-    fract->max_iter = 100;
-
     x = 0;
     while (x < WIDTH)
     {
