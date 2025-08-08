@@ -16,16 +16,16 @@
 *   t_data: Handles MLX window, rendering, and images
 *   t_fractal: Handles logic for fractals (zoom, iterations, etc.)
 */
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    t_data data;
-    t_fractal fract;
+	t_data		data;
+	t_fractal	fract;
 
-    fract.data = &data; //link the fractal to window
-    data.fract = &fract;
-    var_init(&fract);
-    init_window_and_display(&data);
-    fract.return_f = input_validity(&fract, argc, argv);
-    mlx_loop_helper(&data, &fract);
-    return (0);
+	fract.data = &data;
+	data.fract = &fract;
+	var_init(&fract);
+	init_window_and_display(&data);
+	fract.return_f = input_validity(&fract, argc, argv);
+	mlx_loop_helper(&data, &fract);
+	return (0);
 }

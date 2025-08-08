@@ -6,7 +6,7 @@
 /*   By: abita <abita@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 20:56:35 by abita             #+#    #+#             */
-/*   Updated: 2025/07/26 21:08:50 by abita            ###   ########.fr       */
+/*   Updated: 2025/08/08 12:06:46 by abita            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,91 +45,84 @@
 # define BLUE 0x00025F
 
 // libraries
-#include <mlx.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <limits.h>
-#include <math.h>
-#include "../Libft/libft.h"
+# include <mlx.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <limits.h>
+# include <math.h>
+# include "../Libft/libft.h"
 
-typedef struct s_data t_data;
-typedef struct s_fractal t_fractal;
+typedef struct s_data		t_data;
+typedef struct s_fractal	t_fractal;
 
 typedef struct s_img
 {
-    void* img;
-    char* addr;
-    int linelen;
-    int bpp;
-    int endian;
-}   t_img;
+	void	*img;
+	char	*addr;
+	int		linelen;
+	int		bpp;
+	int		endian;
+}	t_img;
 
 typedef struct s_data
 {
-    void *mlx;
-    void *win;
-    t_img img;
-    int i;
-    t_fractal *fract;
-}   t_data;
+	t_fractal	*fract;
+	t_img		img;
+	void		*mlx;
+	void		*win;
+	int			i;
+
+}	t_data;
 
 typedef struct s_complex
 {
-    double real;
-    double imag;
-} t_complex;
+	double	real;
+	double	imag;
+}	t_complex;
 
 typedef struct s_fractal
 {
-    t_data *data;
-    t_complex c;
-    t_complex z;
-    double p1;
-    double p2;
-    double denom;
-    int i;
-    int max_iter;
-    int color;
-    int return_f;
-    double move_x;
-    double move_y;
-    double zoom;
-    int base_color;
-} t_fractal;
-
-typedef struct s_color
-{
-    int r;
-    int g;
-    int b;
-} t_color;
-
+	t_data		*data;
+	t_complex	c;
+	t_complex	z;
+	double		p1;
+	double		p2;
+	double		denom;
+	int			i;
+	int			max_iter;
+	int			color;
+	int			return_f;
+	double		move_x;
+	double		move_y;
+	double		zoom;
+	int			base_color;
+}	t_fractal;
 
 // parsing
-int     input_validity(t_fractal *fract, int argc, char **argv);
-void    var_init(t_fractal *fract);
+int			input_validity(t_fractal *fract, int argc, char **argv);
+void		var_init(t_fractal *fract);
 
 // the fractals
-int     ft_mandelbrot(t_fractal *fract);
-int     ft_julia(t_fractal *fract, double param1, double param2);
-int     ft_multibrot(t_fractal *fract);
+int			ft_mandelbrot(t_fractal *fract);
+int			ft_julia(t_fractal *fract, double param1, double param2);
+int			ft_multibrot(t_fractal *fract);
 
 // init window and mlx funct
-void    init_window_and_display(t_data *data);
-void    my_pixel_put(t_img img, int x, int y, int color);
-void    mlx_loop_helper(t_data *data, t_fractal *fract);
-int     keyhandler(int key, t_data *data);
-void    keyhandler_iter(int key, t_fractal *fract);
-void    fract_type(t_fractal *fract);
-int     mouse_hook(int button, int x, int y, t_fractal *fract);
-int     ft_exit(t_data *data);
+void		init_window_and_display(t_data *data);
+void		my_pixel_put(t_img img, int x, int y, int color);
+void		mlx_loop_helper(t_data *data, t_fractal *fract);
+int			keyhandler(int key, t_data *data);
+void		keyhandler_iter(int key, t_fractal *fract);
+void		fract_type(t_fractal *fract);
+int			mouse_hook(int button, int x, int y, t_fractal *fract);
+int			ft_exit(t_data *data);
 
 // coloring funct
-void    ft_color_fract(t_fractal *fract, int i);
+void		ft_color_fract(t_fractal *fract, int i);
 
 // math funct
-t_complex   complex_square(t_complex z);
-t_complex   complex_square_m(t_complex z);
-double      magnitude(t_complex z);
+t_complex	complex_square(t_complex z);
+t_complex	complex_square_m(t_complex z);
+double		magnitude(t_complex z);
 
 #endif
