@@ -26,9 +26,9 @@ int	input_validity(t_fractal *fract, int argc, char **argv)
 		write (2, "Choose a fractal: 'Mandelbrot' or 'Julia'!", 42);
 		exit (1);
 	}
-	if (ft_strcmp(argv[1], "Mandelbrot") == 0)
+	if (argc == 2 && ft_strcmp(argv[1], "Mandelbrot") == 0)
 		return (ft_mandelbrot(fract), MANDELBROT);
-	else if (ft_strcmp(argv[1], "Multibrot") == 0)
+	else if (argc == 2 && ft_strcmp(argv[1], "Multibrot") == 0)
 		return (ft_multibrot(fract), MULTIBROT);
 	else if (ft_strcmp(argv[1], "Julia") == 0)
 	{
