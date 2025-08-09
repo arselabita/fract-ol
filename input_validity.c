@@ -23,7 +23,7 @@ int	input_validity(t_fractal *fract, int argc, char **argv)
 {
 	if (argc < 2)
 	{
-		write (2, "Choose a fractal: 'Mandelbrot' or 'Julia'!", 42);
+		write (2, "Choose a fractal: Mandelbrot, Julia or Multibrot!\n", 51);
 		exit (1);
 	}
 	if (argc == 2 && ft_strcmp(argv[1], "Mandelbrot") == 0)
