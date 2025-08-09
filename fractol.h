@@ -14,8 +14,8 @@
 # define FRACTOL_H
 
 // scaling
-# define WIDTH 800
-# define HEIGHT 800
+# define WIDTH 500
+# define HEIGHT 500
 # define SCALE_FACTOR 5
 
 // signals
@@ -50,7 +50,7 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <math.h>
-# include "../Libft/libft.h"
+# include "libft/libft.h"
 
 typedef struct s_data		t_data;
 typedef struct s_fractal	t_fractal;

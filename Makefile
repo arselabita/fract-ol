@@ -16,7 +16,7 @@ CFLAGS = -Wall -Wextra -Werror -fsanitize=address,leak,undefined -g3
 
 # executable name
 NAME = fractol
-LIBFT = ../Libft/libft.a
+LIBFT = libft/libft.a
 # source to bject files
 CFILES = \
 	main.c \
@@ -39,15 +39,15 @@ $(NAME): $(OFILES) $(LIBFT)
 	$(CC) $(CFLAGS) -o $(NAME) $(OFILES) $(LIBS) $(LIBFT)
 
 $(LIBFT):
-	make -C ../Libft
+	make -C libft
 
 clean:
 	rm -f $(OFILES)
-	make -C ../Libft clean
+	make -C libft clean
 
 fclean: clean 
 	rm -f $(NAME)
-	make -C ../Libft fclean
+	make -C libft fclean
 
 re: fclean all
 
