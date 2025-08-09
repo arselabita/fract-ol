@@ -46,12 +46,11 @@ void	init_window_and_display(t_data *data)
 		exit (1);
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "The Fract-ol");
 	if (!data->win)
-		exit (1);
+		return (mlx_destroy_display(data->mlx), free(data->mlx));
 	data->img.img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (!data->img.img)
-		exit (1);
+		return (mlx_destroy_window(data->mlx, data->win), mlx_destroy_display(data->mlx),\
+			 free(data->mlx));
 	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bpp, \
 		&data->img.linelen, &data->img.endian);
-	if (!data->img.addr)
-		exit (1);
 }
