@@ -99,7 +99,7 @@ typedef struct s_fractal
 }	t_fractal;
 
 // parsing
-int			input_validity(t_fractal *fract, int argc, char **argv);
+int	input_validity(t_fractal *fract, t_data *data, int argc, char **argv);
 void		var_init(t_fractal *fract);
 
 // the fractals

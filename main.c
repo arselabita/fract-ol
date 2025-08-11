@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	data.fract = &fract;
 	var_init(&fract);
 	init_window_and_display(&data);
-	fract.return_f = input_validity(&fract, argc, argv);
+	fract.return_f = input_validity(&fract, &data, argc, argv);
 	mlx_loop_helper(&data, &fract);
 	return (0);
 }
